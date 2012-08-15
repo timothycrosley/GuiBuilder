@@ -568,7 +568,7 @@ class GuiBuilder(QMainWindow):
             self.ui.elements.addItem(elementSelector, icon, section)
 
 
-if __name__ == "__main__":
+def run():
     styleSheetFile = open("GuiBuilder.css", "r")
     styleSheet = styleSheetFile.read()
     styleSheetFile.close()
@@ -584,3 +584,7 @@ if __name__ == "__main__":
 
 
     sys.exit(app.exec_())
+
+            
+if __name__ == "__main__":
+    run()
