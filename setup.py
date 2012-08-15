@@ -12,4 +12,6 @@ setup(name='GuiBuilder',
       license = "GNU GPLv2",
       scripts=['scripts/guiBuilder',],
       requires = ['webelements', 'pyqt',],
+      package_data={'GuiBuilder': ['**/*.png', '**/*.css']},
+      include_package_data=True,
       packages=['GuiBuilder',],)
