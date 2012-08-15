@@ -1,0 +1,179 @@
+#userInfoDropDownContainer-Toggle
+{
+    width:300px;
+    text-align:center;
+    border:1px lightgray solid;
+    padding:5px;
+}
+
+#userInfoDropDownContainer-Toggle:hover
+{
+    background-color:#DFF0DA;
+}
+
+#userInfoDropDownContainer-Toggle.SelectedDropDown
+{
+    background-color:#C3DFB5;
+    border:1px black solid;
+}
+
+.TaskAction
+{
+    margin-left:10px;
+    background:#E8E8E8;
+    border:1px white solid;
+    text-decoration:None;
+    color:black;
+    padding:3px;
+    padding-bottom:6px;
+}
+
+.TaskAction:hover
+{
+    border:1px gray solid;
+    background-color:lightgray;
+}
+
+.PostponeDropDown .WEToggle
+{
+    margin-left:10px;
+    background:#E8E8E8;
+    border:1px white solid;
+    text-decoration:None;
+    color:black;
+    padding:3px;
+    padding-bottom:6px;
+}
+
+.PostponeDropDown .WEToggle:hover
+{
+    border:1px gray solid;
+    background-color:lightgray;
+}
+
+.PostponeDropDown .SelectedDropDown
+{
+    background-color:gray;
+    color:white;
+}
+
+.UserAction
+{
+    margin:10px;
+    padding:5px;
+    text-decoration:none;
+    background:#CDCDCD;
+    border:1px #C1C1C1 solid;
+    cursor:pointer;
+}
+
+.UserAction:hover
+{
+    background-color:#B4B4B4;
+}
+
+p.error-message, span.error-message
+{
+    padding:0 .5em 0 .5em;
+}
+
+.error-message
+{
+    color: #ffffff;
+    background-color: #ff0000;
+}
+
+.Section
+{
+    padding:4px;
+    text-decoration:none;
+    color:black;
+}
+.Section:Hover
+{
+    background-color:lightgray;
+}
+.Section.Selected
+{
+    background-color:gray;
+    color:white
+}
+
+.RemoveTask
+{
+    text-decoration:none;
+    border:1px gray solid;
+    padding:5px;
+    background-color:lightgray;
+    color:white;
+    font-weight:bold;
+}
+
+.RemoveTask:hover
+{
+    background-color:gray;
+}
+
+.Banner
+{
+    background:gray;
+    padding:5px;
+    border-bottom:1px lightgray solid;
+    color:white
+}
+.ColorChoice
+{
+    border:2px gray solid;
+    margin:1px;
+    height:20px;
+    width:20px;
+}
+.ColorChoice:hover
+{
+    border:2px blue solid;
+}
+.ColorChoice.Selected
+{
+    border:2px black solid;
+}
+.NewTaskText
+{
+    width:100%;
+    height:3em;
+}
+
+#FriendFindersearch
+{
+    margin:2px;
+    width:400px;
+}
+
+/* For body text (all text is inside of tables used for positioning) */
+TD {
+    font-family : Arial, Helvetica, sans-serif;
+    font-size : 11px;
+
+}
+
+TABLE.sortable span.sortarrow {
+    color: black;
+    text-decoration: none;
+}
+
+hr {color:#DF8C42;border:1px solid #DF8C42;}
+
+
+th.rowdark{
+    background-color:#e0e0e0;
+    border:black thin solid;
+}
+
+th
+{
+    background-color: #c4d0e4;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #000000;
+    font-family : Arial, Helvetica, sans-serif;
+    font-size : 11px;
+}
