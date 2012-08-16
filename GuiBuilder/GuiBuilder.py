@@ -110,7 +110,6 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.expand, SIGNAL("clicked()"), self.ui.tree.expandAll)
         self.connect(self.ui.collapse, SIGNAL("clicked()"), self.ui.tree.collapseAll)
         self.connect(self.ui.deleteFromTree, SIGNAL("clicked()"), self.deleteFromTree)
-        self.connect(self.ui.newPage, SIGNAL("clicked()"), self.createPage)
         self.connect(self.ui.reload, SIGNAL("clicked()"), self.reloadEverything)
         self.connect(self.ui.filter, SIGNAL('textChanged(const QString &)'), self.filterItemBrowser)
         self.connect(self.ui.cancelFilter, SIGNAL("clicked()"), self.clearFilter)
@@ -138,10 +137,6 @@ class GuiBuilder(QMainWindow):
         except:
             return
         self.ui.tree.setCurrentItem(self.ui.tree.findItems(selected, Qt.MatchExactly | Qt.MatchRecursive, 4)[0])
-
-    def createPage(self):
-        Popen("instantlyGUI", shell=True)
-        sys.exit(1)
 
     def startDocBrowser(self):
         Popen("webElementDocs", shell=True)

@@ -7,6 +7,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+import os
+
 from PyQt4 import QtCore, QtGui
 
 class Ui_MainWindow(object):
@@ -33,7 +35,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setSpacing(1)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.label = QtGui.QLabel(self.frame_2)
-        self.label.setPixmap(QtGui.QPixmap("../../../adc/tools/gui_builder_files/icons/find.png"))
+        self.label.setPixmap(QtGui.QPixmap(os.path.dirname(__file__) + "/icons/find.png"))
         self.label.setObjectName("label")
         self.horizontalLayout_8.addWidget(self.label)
         self.filter = QtGui.QLineEdit(self.frame_2)
@@ -41,7 +43,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.filter)
         self.cancelFilter = QtGui.QToolButton(self.frame_2)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../adc/tools/gui_builder_files/icons/cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(os.path.dirname(__file__) + "/icons/cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.cancelFilter.setIcon(icon)
         self.cancelFilter.setIconSize(QtCore.QSize(16, 16))
         self.cancelFilter.setAutoRaise(True)

@@ -31,9 +31,9 @@ class WebElementDocs(QMainWindow):
         self.ui.setupUi(self)
 
         self.setWindowTitle('WebElement Documentation Browser')
-        self.setWindowIcon(QIcon('icons/documentation.png'))
+        self.setWindowIcon(QIcon(os.path.dirname(__file__) + '/icons/documentation.png'))
 
-        self.genericElementIcon = QIcon('icons/elements/generic.png')
+        self.genericElementIcon = QIcon(os.path.dirname(__file__) + '/icons/elements/generic.png')
         self.populateElements()
         self.ui.cancelFilter.hide()
 
@@ -98,7 +98,7 @@ class WebElementDocs(QMainWindow):
         self.ui.cancelFilter.show()
 
     def elementIcon(self, elementName):
-        iconName = "icons/elements/" + elementName.split('.')[-1].lower() + ".png"
+        iconName = os.path.dirname(__file__) + "/icons/elements/" + elementName.split('.')[-1].lower() + ".png"
         if os.path.isfile(iconName):
             return QIcon(iconName)
         else:
@@ -134,7 +134,7 @@ class WebElementDocs(QMainWindow):
             self.ui.elements.addItem(elementSelector, icon, section)
 
 
-if __name__ == "__main__":
+def run():
     app = QApplication(sys.argv)
 
     window = WebElementDocs()
@@ -142,3 +142,7 @@ if __name__ == "__main__":
     window.show()
 
     sys.exit(app.exec_())
+    
+            
+if __name__ == "__main__":
+    run()
