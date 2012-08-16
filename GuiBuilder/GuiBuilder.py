@@ -71,7 +71,7 @@ class PropertyController(QObject):
 
 
 class GuiBuilder(QMainWindow):
-    session = Session(os.getcwd() + "/GuiBuilder.session")
+    session = Session(os.path.expanduser('~') + "/.GuiBuilderSession")
 
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
