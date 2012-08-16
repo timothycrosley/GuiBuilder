@@ -569,7 +569,7 @@ class GuiBuilder(QMainWindow):
 
 
 def run():
-    styleSheetFile = open("GuiBuilder.css", "r")
+    styleSheetFile = open(os.getcwd() + "/GuiBuilder.css", "r")
     styleSheet = styleSheetFile.read()
     styleSheetFile.close()
 

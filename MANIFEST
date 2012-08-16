@@ -135,7 +135,6 @@ GuiBuilder/static/js/HoneyDoes.js
 GuiBuilder/static/js/JavascriptUtils.js
 GuiBuilder/static/js/popcalendar.js
 GuiBuilder/static/js/prototype.js
-GuiBuilder/static/stylesheets/HoneyDoes.css
-GuiBuilder/static/stylesheets/ItemViews.css
+GuiBuilder/static/stylesheets/ModelView.css
 GuiBuilder/static/stylesheets/WebElements.css
 scripts/guiBuilder
