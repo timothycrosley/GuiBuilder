@@ -498,7 +498,7 @@ class Ui_MainWindow(object):
         self.frame_4.setStyleSheet(QtGui.QApplication.translate("MainWindow", "\n"
 "    background:white;", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setStyleSheet(QtGui.QApplication.translate("MainWindow", "font-size:15px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("MainWindow", "Welcome to WebElement GUI Builder version 0.5. A tool designed to allow anyone to easily create user interfaces for widgets and web applications with an emphasis on element reuse.", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("MainWindow", "Welcome to WebElement GUI Builder version 0.1. A tool designed to allow anyone to easily create user interfaces for widgets and web applications with an emphasis on element reuse.", None, QtGui.QApplication.UnicodeUTF8))
         self.open.setText(QtGui.QApplication.translate("MainWindow", "Open Template", None, QtGui.QApplication.UnicodeUTF8))
         self.newTemplate.setText(QtGui.QApplication.translate("MainWindow", "Create New Template", None, QtGui.QApplication.UnicodeUTF8))
         self.continueEditing.setText(QtGui.QApplication.translate("MainWindow", "Continues Editing \'file\' >", None, QtGui.QApplication.UnicodeUTF8))

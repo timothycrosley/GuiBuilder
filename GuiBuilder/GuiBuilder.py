@@ -177,7 +177,7 @@ class GuiBuilder(QMainWindow):
             return
 
         answer = QMessageBox.question(self, 'Are you sure you want to delete elements?',
-                                      "Are you susre you want to delete " + str(len(selectedItems)) +
+                                      "Are you sure you want to delete " + str(len(selectedItems)) +
                                       " element(s)?", QMessageBox.Yes | QMessageBox.No)
         if not answer == QMessageBox.Yes:
             return
