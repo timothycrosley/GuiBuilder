@@ -84,9 +84,9 @@ class GuiBuilder(QMainWindow):
         self.ui.preview.settings().setAttribute(QWebSettings.AutoLoadImages, True)
 
         self.setWindowTitle('WebElement UITemplate Builder')
-        self.setWindowIcon(QIcon('icons/icon.png'))
+        self.setWindowIcon(QIcon(os.path.dirname(__file__) + '/icons/icon.png'))
         self.setCurrentFile(None)
-        self.genericElementIcon = QIcon('icons/elements/generic.png')
+        self.genericElementIcon = QIcon(os.path.dirname(__file__) + '/icons/elements/generic.png')
         self.oldTemplate = ""
         self.populateElements()
         self.propertyMap = {}
@@ -310,7 +310,7 @@ class GuiBuilder(QMainWindow):
             self.__convertDictToNode(childElement, newNode)
 
     def elementIcon(self, elementName):
-        iconName = "icons/elements/" + elementName.split('.')[-1].lower() + ".png"
+        iconName = os.path.dirname(__file__) + "/icons/elements/" + elementName.split('.')[-1].lower() + ".png"
         if os.path.isfile(iconName):
             return QIcon(iconName)
         else:
