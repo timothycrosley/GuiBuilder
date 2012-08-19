@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import os
+import glob
+
 import WebElements.All as WebElements
 
-sharedFilesRoot = "/home/timothy/Applications/GuiBuilder/static/"
+sharedFilesRoot = os.environ.get("GUI_BUILDER_SHARED_FILES_ROOT",
+                                 os.path.dirname(__file__) + "/static/")
 indent = " "
 
 WebElements.Fields.Factory.products.pop('field', None)
@@ -44,16 +48,15 @@ sections = ({'Name':'Layout',
             {'Name':'Printing',
              'Factory':WebElements.Printing.Factory,
              'Icon':'icons/sections/printing.png'},
+            {'Name':'CodeDocumentation',
+             'Factory':WebElements.CodeDocumentation.Factory,
+             'Icon':'icons/sections/standard.png'},
            )
 
 factories = [WebElements.Factory]
 
-javascriptFiles = ['js/prototype.js',
-                   'js/prototypeUtils.js',
-                   'js/JavascriptUtils.js']
-
-cssFiles = ['stylesheets/WebElements.css',
-            'stylesheets/HoneyDoes.css']
+javascriptFiles = glob.glob(sharedFilesRoot + "**/*.js")
+cssFiles = glob.glob(sharedFilesRoot + "**/*.css")
 
 Factory = WebElements.FactoryClasses.Composite(factories)
 WebElements.Display.Factory.addProduct(WebElements.Base.Invalid)
