@@ -269,28 +269,31 @@ class GuiBuilder(QMainWindow):
         self.ui.tree.clear()
 
         self.disconnect(self.ui.baseLayout, SIGNAL("currentIndexChanged(const QString &)"), self.convertTreeToTemplate)
-        baseLayout = self.structure.get('create', 'flow')
+        baseLayout = self.structure.create or 'flow'
         for index in xrange(self.ui.baseLayout.count()):
             self.ui.baseLayout.setCurrentIndex(index)
             if self.ui.baseLayout.currentText() == baseLayout:
                 break
         self.connect(self.ui.baseLayout, SIGNAL("currentIndexChanged(const QString &)"), self.convertTreeToTemplate)
 
-        for childElement in self.structure.get('childElements', []):
+        for childElement in self.structure.childElements:
             self.__convertDictToNode(childElement, self.ui.tree)
         self.ui.tree.expandAll()
 
     def __convertDictToNode(self, structure, node):
-        create = structure.pop('create', None)
+        if type(structure) in (str, unicode):
+            return
+
+        create = structure.create
         if not create:
             return
 
         newNode = QTreeWidgetItem(node)
         newNode.setText(0, create)
         newNode.setIcon(0, self.elementIcon(create))
-        newNode.setText(1, structure.get('id', ''))
-        newNode.setText(2, structure.get('name', ''))
-        newNode.setText(3, structure.get('accessor', ''))
+        newNode.setText(1, structure.id)
+        newNode.setText(2, structure.name)
+        newNode.setText(3, structure.accessor)
         newNode.setText(4, self.newElementKey())
         if self.selectedKey != None:
             if newNode.text(4) == self.selectedKey:
@@ -298,8 +301,8 @@ class GuiBuilder(QMainWindow):
                 self.ui.tree.setCurrentItem(newNode)
                 self.ui.tree.scrollTo(self.ui.tree.currentIndex())
 
-        childElements = structure.pop('childElements', [])
-        self.propertyMap[unicode(newNode.text(4))] = structure
+        childElements = structure.childElements
+        self.propertyMap[unicode(newNode.text(4))] = dict(structure.properties)
 
         for childElement in childElements:
             self.__convertDictToNode(childElement, newNode)
@@ -410,29 +413,33 @@ class GuiBuilder(QMainWindow):
         self.updatePreview(False)
 
     def highlightSelected(self, uiStructure, index=0, inTab=None):
-        for element in uiStructure.get('childElements', []):
+        print uiStructure
+        for element in (element for element in uiStructure.childElements if type(element) not in (str, unicode)):
             elementType = element.create.lower()
-            onclick = {'onclick':(";document.title = '%s';" % index)}
-            element.properties.append(('javascriptEvents', onclick))
+            element.properties = dict(element.properties)
+            properties = element.properties
+            properties.setdefault('javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
+                                                                     (index, properties.get('onclick', '')))
             if 'field' in elementType:
-                element.properties.append(('userInput.javascriptEvents', onclick))
-                element.properties.append(('label.javascriptEvents', onclick))
+                properties.setdefault('userInput.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
+                                                                                   (index, properties.get('onclick', '')))
+                properties.setdefault('label.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
+                                                                               (index, properties.get('onclick', '')))
             elif 'tab' == elementType:
                 inTab = element
-                element.properties.append(('tabLabel.javascriptEvents', onclick))
+                properties.setdefault('tabLabel.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
+                                                                               (index, properties.get('onclick', '')))
             if index == int(self.selectedKey or -1):
                 if 'field' in elementType:
-                    element['labelStyle'] = "border:2px blue dashed;" + element.get('labelStyle', '')
+                    properties['labelStyle'] = "border:2px blue dashed;" + properties.get('labelStyle', '')
 
                 if 'tab' == elementType:
-                    element.properties.append(('select', True))
+                    properties['select'] = True
                 elif inTab:
-                    inTab.properties.append(('select', True))
-                element.properties.append(('style', "border:2px blue dashed;" + element.get('style', '')))
+                    inTab.properties['select'] = True
+                properties['style'] = "border:2px blue dashed;" + properties.get('style', '')
             index += 1
             index = self.highlightSelected(element, index, inTab)
-            element
-
         return index
 
     def updatePreview(self, redrawTree=True):
@@ -451,7 +458,7 @@ class GuiBuilder(QMainWindow):
 	    print "Reloading"
             structureCopy = copy.deepcopy(self.structure)
             self.highlightSelected(structureCopy)
-            element = GuiBuilderConfig.Factory.buildFromDictionary(structureCopy)
+            element = GuiBuilderConfig.Factory.buildFromTemplate(structureCopy)
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
