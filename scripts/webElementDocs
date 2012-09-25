@@ -1,0 +1,5 @@
+#!/usr/bin/python
+
+from GuiBuilder import WebElementDocs
+
+WebElementDocs.run()
