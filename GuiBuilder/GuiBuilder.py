@@ -409,29 +409,26 @@ class GuiBuilder(QMainWindow):
         self.oldTemplate = None
         self.updatePreview(False)
 
-    def highlightSelected(self, uiDict, index=0, inTab=None):
-        for element in uiDict.get('childElements', []):
-            elementType = element['create'].lower()
-            element.setdefault('javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                     (index, element.get('onclick', '')))
+    def highlightSelected(self, uiStructure, index=0, inTab=None):
+        for element in uiStructure.get('childElements', []):
+            elementType = element.create.lower()
+            onclick = {'onclick':(";document.title = '%s';" % index)}
+            element.properties.append(('javascriptEvents', onclick))
             if 'field' in elementType:
-                element.setdefault('userInput.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                                   (index, element.get('onclick', '')))
-                element.setdefault('label.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                               (index, element.get('onclick', '')))
+                element.properties.append(('userInput.javascriptEvents', onclick))
+                element.properties.append(('label.javascriptEvents', onclick))
             elif 'tab' == elementType:
                 inTab = element
-                element.setdefault('tabLabel.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                               (index, element.get('onclick', '')))
+                element.properties.append(('tabLabel.javascriptEvents', onclick))
             if index == int(self.selectedKey or -1):
                 if 'field' in elementType:
                     element['labelStyle'] = "border:2px blue dashed;" + element.get('labelStyle', '')
 
                 if 'tab' == elementType:
-                    element['select'] = True
+                    element.properties.append(('select', True))
                 elif inTab:
-                    inTab['select'] = True
-                element['style'] = "border:2px blue dashed;" + element.get('style', '')
+                    inTab.properties.append(('select', True))
+                element.properties.append(('style', "border:2px blue dashed;" + element.get('style', '')))
             index += 1
             index = self.highlightSelected(element, index, inTab)
             element
@@ -580,6 +577,6 @@ def run():
 
     sys.exit(app.exec_())
 
-            
+
 if __name__ == "__main__":
     run()
