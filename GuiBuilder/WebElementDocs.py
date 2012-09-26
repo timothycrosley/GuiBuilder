@@ -61,7 +61,7 @@ class WebElementDocs(QMainWindow):
             if attributeName.startswith("_"):
                 continue
 
-            attribute = product.__getattribute__(attributeName)
+            attribute = getattr(product, attributeName, None)
             formattedName = attributeName
             try:
                 argSpec = inspect.getargspec(attribute)
@@ -142,7 +142,7 @@ def run():
     window.show()
 
     sys.exit(app.exec_())
-    
-            
+
+
 if __name__ == "__main__":
     run()
