@@ -51,6 +51,9 @@ sections = ({'Name':'Layout',
             {'Name':'CodeDocumentation',
              'Factory':WebElements.CodeDocumentation.Factory,
              'Icon':'icons/sections/standard.png'},
+            {'Name':'DOM',
+             'Factory':WebElements.DOM.Factory,
+             'Icon':'icons/sections/standard.png'},
            )
 
 factories = [WebElements.Factory]
