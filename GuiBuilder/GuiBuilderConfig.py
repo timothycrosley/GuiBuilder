@@ -5,7 +5,7 @@ import glob
 import WebElements.All as WebElements
 
 sharedFilesRoot = os.environ.get("GUI_BUILDER_SHARED_FILES_ROOT",
-                                 os.path.dirname(__file__) + "/static/")
+                                 (os.path.dirname(__file__) or ".") + "/static/")
 indent = " "
 
 WebElements.Fields.Factory.products.pop('field', None)

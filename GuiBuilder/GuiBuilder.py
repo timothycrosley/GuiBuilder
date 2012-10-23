@@ -30,6 +30,8 @@ from WebElements import UITemplate
 
 sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
 
+FILE_PATH = os.path.dirname(__file__) or "."
+
 
 class PropertyController(QObject):
 
@@ -84,9 +86,9 @@ class GuiBuilder(QMainWindow):
         self.ui.preview.settings().setAttribute(QWebSettings.AutoLoadImages, True)
 
         self.setWindowTitle('WebElement UITemplate Builder')
-        self.setWindowIcon(QIcon(os.path.dirname(__file__) + '/icons/icon.png'))
+        self.setWindowIcon(QIcon(FILE_PATH + '/icons/icon.png'))
         self.setCurrentFile(None)
-        self.genericElementIcon = QIcon(os.path.dirname(__file__) + '/icons/elements/generic.png')
+        self.genericElementIcon = QIcon(FILE_PATH + '/icons/elements/generic.png')
         self.oldTemplate = ""
         self.populateElements()
         self.propertyMap = {}
@@ -302,13 +304,15 @@ class GuiBuilder(QMainWindow):
                 self.ui.tree.scrollTo(self.ui.tree.currentIndex())
 
         childElements = structure.childElements
-        self.propertyMap[unicode(newNode.text(4))] = dict(structure.properties)
+        propertyDict = dict(structure.properties)
+        propertyDict.update({'id':structure.id, 'name':structure.name, 'accessor':structure.accessor})
+        self.propertyMap[unicode(newNode.text(4))] = propertyDict
 
         for childElement in childElements:
             self.__convertDictToNode(childElement, newNode)
 
     def elementIcon(self, elementName):
-        iconName = os.path.dirname(__file__) + "/icons/elements/" + elementName.split('.')[-1].lower() + ".png"
+        iconName = FILE_PATH + "/icons/elements/" + elementName.split('.')[-1].lower() + ".png"
         if os.path.isfile(iconName):
             return QIcon(iconName)
         else:
@@ -568,7 +572,7 @@ class GuiBuilder(QMainWindow):
 
 
 def run():
-    styleSheetFile = open(os.path.dirname(__file__) + "/GuiBuilder.css", "r")
+    styleSheetFile = open(FILE_PATH + "/GuiBuilder.css", "r")
     styleSheet = styleSheetFile.read()
     styleSheetFile.close()
 

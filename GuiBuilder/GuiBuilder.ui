@@ -21,7 +21,7 @@
     <item>
      <widget class="QStackedWidget" name="pages">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -370,7 +370,7 @@
                 <string>font-size:15px;</string>
                </property>
                <property name="text">
-                <string>Welcome to WebElement GUI Builder version 0.5. A tool designed to allow anyone to easily create user interfaces for widgets and web applications with an emphasis on element reuse.</string>
+                <string>Welcome to WebElement GUI Builder version 0.6. A tool designed to allow anyone to easily create user interfaces for widgets and web applications with an emphasis on element reuse.</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::RichText</enum>
@@ -474,26 +474,6 @@
                  </property>
                  <property name="default">
                   <bool>false</bool>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="newPage">
-                 <property name="text">
-                  <string>Create New Page</string>
-                 </property>
-                 <property name="icon">
-                  <iconset>
-                   <normaloff>../../../adc/tools/gui_builder_files/icons/app.png</normaloff>../../../adc/tools/gui_builder_files/icons/app.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>64</width>
-                   <height>64</height>
-                  </size>
                  </property>
                  <property name="flat">
                   <bool>true</bool>
@@ -843,8 +823,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>166</width>
-                     <height>572</height>
+                     <width>134</width>
+                     <height>571</height>
                     </rect>
                    </property>
                    <attribute name="label">
@@ -1101,7 +1081,7 @@
                     <bool>false</bool>
                    </property>
                    <property name="dragDropMode">
-                    <enum>QAbstractItemView::DropOnly</enum>
+                    <enum>QAbstractItemView::DragDrop</enum>
                    </property>
                    <property name="alternatingRowColors">
                     <bool>true</bool>
@@ -1164,7 +1144,7 @@
                </widget>
                <widget class="QWidget" name="tab_2">
                 <attribute name="title">
-                 <string>Template</string>
+                 <string>XML</string>
                 </attribute>
                 <layout class="QVBoxLayout" name="verticalLayout_4">
                  <property name="spacing">
@@ -1177,6 +1157,11 @@
                   <widget class="QTextEdit" name="wuiTemplate"/>
                  </item>
                 </layout>
+               </widget>
+               <widget class="QWidget" name="tab_3">
+                <attribute name="title">
+                 <string>SHPAML</string>
+                </attribute>
                </widget>
               </widget>
              </item>
@@ -1235,8 +1220,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>164</width>
-                     <height>609</height>
+                     <width>139</width>
+                     <height>608</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_9">
