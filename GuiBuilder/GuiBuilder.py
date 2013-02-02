@@ -10,6 +10,7 @@
     Lost? For Extensive and up-to-date documentation on GuiBuilder point your browser to:
         http://wiki.arincdirect.net/bin/view/Adc/GuiBuilder
 """
+
 import inspect
 import copy
 import os
@@ -17,9 +18,9 @@ import sys
 import types
 from subprocess import Popen
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from PyQt4.QtWebKit import *
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySide.QtWebKit import *
 
 import GuiBuilderConfig
 from WebElements.DictUtils import OrderedDict
@@ -27,11 +28,9 @@ from GuiBuilderConfig import indent
 from GuiBuilderView import Ui_MainWindow
 from Session import Session
 from WebElements import UITemplate
+from WebElements import shpaml
 
 sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
-
-FILE_PATH = os.path.dirname(__file__) or "."
-
 
 class PropertyController(QObject):
 
@@ -86,9 +85,9 @@ class GuiBuilder(QMainWindow):
         self.ui.preview.settings().setAttribute(QWebSettings.AutoLoadImages, True)
 
         self.setWindowTitle('WebElement UITemplate Builder')
-        self.setWindowIcon(QIcon(FILE_PATH + '/icons/icon.png'))
+        self.setWindowIcon(QIcon('icons/icon.png'))
         self.setCurrentFile(None)
-        self.genericElementIcon = QIcon(FILE_PATH + '/icons/elements/generic.png')
+        self.genericElementIcon = QIcon('icons/elements/generic.png')
         self.oldTemplate = ""
         self.populateElements()
         self.propertyMap = {}
@@ -98,7 +97,8 @@ class GuiBuilder(QMainWindow):
 
         self.connect(self.ui.newTemplate, SIGNAL('clicked()'), self.newTemplate)
         self.connect(self.ui.backToStartPage, SIGNAL('clicked()'), self.backToStartPage)
-        self.connect(self.ui.wuiTemplate, SIGNAL("textChanged()"), self.updatePreview)
+        self.connect(self.ui.wuiXML, SIGNAL("textChanged()"), self.updatePreview)
+        self.connect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
         self.connect(self.ui.open, SIGNAL("clicked()"), self.open)
         self.connect(self.ui.save, SIGNAL("clicked()"), self.save)
         self.connect(self.ui.saveAs, SIGNAL("clicked()"), self.saveAs)
@@ -108,7 +108,6 @@ class GuiBuilder(QMainWindow):
                      self.updateProperties)
         self.connect(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
                      self.refreshPreviewKeepTree)
-        self.connect(self.ui.rearrange, SIGNAL("toggled(bool)"), self.changeTreeDragDropMode)
         self.connect(self.ui.expand, SIGNAL("clicked()"), self.ui.tree.expandAll)
         self.connect(self.ui.collapse, SIGNAL("clicked()"), self.ui.tree.collapseAll)
         self.connect(self.ui.deleteFromTree, SIGNAL("clicked()"), self.deleteFromTree)
@@ -126,12 +125,19 @@ class GuiBuilder(QMainWindow):
             self.convertTreeToTemplate()
             self.ui.filter.selectAll()
             self.ui.filter.setFocus()
+            self.resizeTreeColumns()
             return to_return
 
         self.ui.tree.dropEvent = treeDropEvent
         self.ui.tree.setHeaderHidden(False)
         self.ui.continueEditing.hide()
         self.populateRecentlyOpened()
+
+        self.ui.cancelFilter.hide()
+
+    def resizeTreeColumns(self):
+        for column in xrange(4):
+            self.ui.tree.resizeColumnToContents(column)
 
     def selectElement(self, selected):
         try:
@@ -203,43 +209,56 @@ class GuiBuilder(QMainWindow):
         self.ui.properties.clear()
         self.ui.info.setText("")
 
+    def updateXML(self):
+        self.ui.wuiXML.setText(shpaml.convert_text(self.ui.wuiSHPAML.toPlainText()))
+
     def convertTreeToTemplate(self):
         baseTag = str(self.ui.baseLayout.currentText()).lower()
-        template = ['<' + baseTag + '>']
-        for topLevelItemIndex in xrange(self.ui.tree.topLevelItemCount()):
+        childCount = self.ui.tree.topLevelItemCount()
+        template = [(childCount == 0 and "> " or "") + baseTag + "\n"]
+        for topLevelItemIndex in xrange(childCount):
             template.append(str(self.__templateFromTreeNode(self.ui.tree.topLevelItem(topLevelItemIndex))))
 
-        template.append('</' + baseTag + '>')
-        self.ui.wuiTemplate.setText(QString(''.join(template)))
+        template = ''.join(template)
+        if template != self.ui.wuiSHPAML.toPlainText():
+            self.ui.wuiSHPAML.setText(template)
 
-    def __templateFromTreeNode(self, node, indentationLevel=0):
+    def __templateFromTreeNode(self, node, indentationLevel=1):
         indentation = (indent * indentationLevel) or ""
-        xml = indentation + "<" + node.text(0)
+        childCount = node.childCount()
+        xml = indentation + (childCount == 0 and "> " or "") + node.text(0)
         if node.text(0) == "label":
             node.properties = self.propertyMap.get(unicode(node.text(4)), {'text':'Label'})
         else:
             node.properties = self.propertyMap.get(unicode(node.text(4)), {})
+
+        accessor = node.properties.pop('accessor', None)
+        if accessor:
+            xml += "@" + accessor
+        nodeID = node.properties.pop('id', None)
+        if nodeID:
+            xml += "#" + nodeID
+        classes = node.properties.pop('class', None)
+        if classes:
+            for nodeClass in classes.split(' '):
+                xml += "." + nodeClass
         for propertyName, propertyValue in node.properties.iteritems():
             if not propertyValue:
                 continue
 
             propertyValue = unicode(propertyValue).replace("&amp;", "&").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-            xml += " " + unicode(propertyName) + '="' + propertyValue + '"'
+            if not " " in propertyValue and not '"' in propertyValue:
+                xml += " " + unicode(propertyName) + '=' + propertyValue
+            else:
+                xml += " " + unicode(propertyName) + '="' + propertyValue + '"'
 
-        xml += ">\n"
+        xml += "\n"
 
-        for childIndex in range(0, node.childCount()):
+        for childIndex in range(0, childCount):
             childNode = node.child(childIndex)
             xml += self.__templateFromTreeNode(childNode, indentationLevel + 1)
 
-        xml += indentation + "</" + node.text(0) + ">\n"
         return xml
-
-    def changeTreeDragDropMode(self, internalOnly=False):
-        if internalOnly:
-            self.ui.tree.setDragDropMode(QAbstractItemView.InternalMove);
-        else:
-            self.ui.tree.setDragDropMode(QAbstractItemView.DropOnly);
 
     def gotoEditPage(self):
         self.ui.pages.setCurrentIndex(1)
@@ -297,13 +316,14 @@ class GuiBuilder(QMainWindow):
         newNode.setText(2, structure.name)
         newNode.setText(3, structure.accessor)
         newNode.setText(4, self.newElementKey())
+        self.resizeTreeColumns()
         if self.selectedKey != None:
             if newNode.text(4) == self.selectedKey:
                 newNode.setSelected(True)
                 self.ui.tree.setCurrentItem(newNode)
                 self.ui.tree.scrollTo(self.ui.tree.currentIndex())
 
-        childElements = structure.childElements
+        childElements = structure.childElements or ()
         propertyDict = dict(structure.properties)
         propertyDict.update({'id':structure.id, 'name':structure.name, 'accessor':structure.accessor})
         self.propertyMap[unicode(newNode.text(4))] = propertyDict
@@ -312,7 +332,7 @@ class GuiBuilder(QMainWindow):
             self.__convertDictToNode(childElement, newNode)
 
     def elementIcon(self, elementName):
-        iconName = FILE_PATH + "/icons/elements/" + elementName.split('.')[-1].lower() + ".png"
+        iconName = "icons/elements/" + elementName.split('.')[-1].lower() + ".png"
         if os.path.isfile(iconName):
             return QIcon(iconName)
         else:
@@ -320,7 +340,7 @@ class GuiBuilder(QMainWindow):
 
     def newTemplate(self):
         self.setCurrentFile(None)
-        self.ui.wuiTemplate.setText('<flow>\n</flow>')
+        self.ui.wuiXML.setText('<flow>\n</flow>')
         self.gotoEditPage()
 
     def backToStartPage(self):
@@ -363,7 +383,7 @@ class GuiBuilder(QMainWindow):
         template = templateFile.read()
         templateFile.close()
 
-        self.ui.wuiTemplate.setText(template)
+        self.ui.wuiSHPAML.setText(template)
         self.setCurrentFile(fileName)
 
         self.gotoEditPage()
@@ -373,7 +393,7 @@ class GuiBuilder(QMainWindow):
             self.saveAs()
 
         with open(self.currentFile, 'w') as wuiFile:
-            wuiFile.write(self.ui.wuiTemplate.toPlainText())
+            wuiFile.write(self.ui.wuiSHPAML.toPlainText())
         Popen("webkit", shell=True)
 
     def saveAs(self):
@@ -382,6 +402,7 @@ class GuiBuilder(QMainWindow):
         if not fileName:
             return
 
+        fileName = fileName[0]
         if not ".wui" in fileName:
             fileName = fileName + ".wui"
 
@@ -418,7 +439,8 @@ class GuiBuilder(QMainWindow):
 
     def highlightSelected(self, uiStructure, index=0, inTab=None):
         print uiStructure
-        for element in (element for element in uiStructure.childElements if type(element) not in (str, unicode)):
+        for element in (element for element in uiStructure.childElements or ()
+                        if type(element) not in (str, unicode)):
             elementType = element.create.lower()
             element.properties = dict(element.properties)
             properties = element.properties
@@ -447,29 +469,32 @@ class GuiBuilder(QMainWindow):
         return index
 
     def updatePreview(self, redrawTree=True):
-        if not self.ui.wuiTemplate.toPlainText() or self.ui.wuiTemplate.toPlainText() == self.oldTemplate:
+        if not self.ui.wuiXML.toPlainText() or self.ui.wuiXML.toPlainText() == self.oldTemplate:
             return
 
-        self.oldTemplate = self.ui.wuiTemplate.toPlainText()
+        self.oldTemplate = self.ui.wuiXML.toPlainText()
         try:
-            self.structure = UITemplate.fromXML(unicode(self.ui.wuiTemplate.toPlainText()))
+            self.structure = UITemplate.fromXML(unicode(self.ui.wuiXML.toPlainText()))
             validTemplate = True
         except Exception, e:
             validTemplate = False
             print "There was an error converting the template to structure: " + unicode(e)
 
         if validTemplate:
-	    print "Reloading"
+            print "Reloading"
             structureCopy = copy.deepcopy(self.structure)
             self.highlightSelected(structureCopy)
             element = GuiBuilderConfig.Factory.buildFromTemplate(structureCopy)
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
-            print self.html(element.toHtml())
-            self.ui.preview.setHtml(self.html(element.toHtml()), sharedFilesRoot)
+            print self.html(element.toHTML())
+            self.ui.preview.setHtml(self.html(element.toHTML()), sharedFilesRoot)
             if redrawTree:
                 self.updateTree()
+                self.disconnect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
+                self.convertTreeToTemplate()
+                self.connect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
 
     def updateProperties(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:
@@ -505,6 +530,9 @@ class GuiBuilder(QMainWindow):
             controller = PropertyController(unicode(item.text(4)), propertyName, propertyType, self)
             self.ui.properties.setCellWidget(propertyIndex, 1, controller.widget)
             self.propertyControls[propertyName] = controller
+
+        self.ui.properties.resizeColumnsToContents()
+        self.ui.properties.resizeRowsToContents()
 
     def updateDocumentation(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:
@@ -572,13 +600,10 @@ class GuiBuilder(QMainWindow):
 
 
 def run():
-    styleSheetFile = open(FILE_PATH + "/GuiBuilder.css", "r")
-    styleSheet = styleSheetFile.read()
-    styleSheetFile.close()
-
+    os.chdir(os.path.dirname(__file__) or ".")
     app = QApplication(sys.argv)
-    app.setStyleSheet(styleSheet)
-
+    with open("GuiBuilder.css") as cssFile:
+        app.setStyleSheet(cssFile.read())
     window = GuiBuilder()
     if len(sys.argv) > 1:
         window.setFile(sys.argv[1])

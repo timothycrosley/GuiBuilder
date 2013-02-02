@@ -2,14 +2,12 @@
 
 # Form implementation generated from reading ui file 'WebElementDocs.ui'
 #
-# Created: Thu May 12 12:06:55 2011
-#      by: PyQt4 UI code generator 4.6.2
+# Created: Tue Jan 29 14:15:50 2013
+#      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
 
-import os
-
-from PyQt4 import QtCore, QtGui
+from PySide import QtCore, QtGui
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -19,7 +17,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtGui.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.frame_2 = QtGui.QFrame(self.centralwidget)
         self.frame_2.setMinimumSize(QtCore.QSize(250, 0))
@@ -29,13 +27,14 @@ class Ui_MainWindow(object):
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.frame_2)
         self.verticalLayout_8.setSpacing(-1)
-        self.verticalLayout_8.setMargin(0)
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.horizontalLayout_8 = QtGui.QHBoxLayout()
         self.horizontalLayout_8.setSpacing(1)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.label = QtGui.QLabel(self.frame_2)
-        self.label.setPixmap(QtGui.QPixmap(os.path.dirname(__file__) + "/icons/find.png"))
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("../../../adc/tools/gui_builder_files/icons/find.png"))
         self.label.setObjectName("label")
         self.horizontalLayout_8.addWidget(self.label)
         self.filter = QtGui.QLineEdit(self.frame_2)
@@ -43,7 +42,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.filter)
         self.cancelFilter = QtGui.QToolButton(self.frame_2)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(os.path.dirname(__file__) + "/icons/cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../adc/tools/gui_builder_files/icons/cancel.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.cancelFilter.setIcon(icon)
         self.cancelFilter.setIconSize(QtCore.QSize(16, 16))
         self.cancelFilter.setAutoRaise(True)
@@ -55,7 +54,7 @@ class Ui_MainWindow(object):
         self.elementsFrame = QtGui.QWidget()
         self.elementsFrame.setObjectName("elementsFrame")
         self.gridLayout = QtGui.QGridLayout(self.elementsFrame)
-        self.gridLayout.setMargin(0)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
         self.elements = QtGui.QToolBox(self.elementsFrame)
@@ -70,7 +69,7 @@ class Ui_MainWindow(object):
         self.page_7.setObjectName("page_7")
         self.verticalLayout_12 = QtGui.QVBoxLayout(self.page_7)
         self.verticalLayout_12.setSpacing(0)
-        self.verticalLayout_12.setMargin(0)
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.searchResults = QtGui.QListWidget(self.page_7)
         self.searchResults.setDragDropMode(QtGui.QAbstractItemView.DragOnly)

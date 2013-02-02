@@ -1,0 +1,12 @@
+*.kate-swp
+*.sass-cache
+*.pyc
+*~
+*.swp
+Tests/__pycache__
+.sass-cache/
+Tests/.test_WebElements_Benchmark.results
+build
+*.session
+*.ui.backup.*
+*.py.backup.*

@@ -13,3 +13,132 @@ ElementCanvas
 {
     background:white;
 }
+
+#splitter_2
+{
+    background-color:rgb(204, 204, 204);
+}
+
+#frame_5
+{
+    background:white;
+}
+QPushButton[checkable="false"]
+{
+    font-size: 19px;
+    padding:0.3em 1.5em;
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(228, 228, 228, 255), stop:1  rgba(203, 203, 203, 255));
+    color: black;
+    border-radius:10px;
+    border: 1px solid #bebebe;
+    text-shadow: #f7f7f7 0 1px 0;
+}
+
+QPushButton#newTemplate
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(102, 159, 95, 255), stop:1  rgba(82, 127, 76, 255));
+    color: white;
+    border-radius:10px;
+    border: 1px  solid #476F42;
+    text-shadow: #314C2D 0 -1px 0;
+}
+
+QPushButton#backToStartPage, QPushButton#deleteFromTree
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(195, 0, 0, 255), stop:1  rgba(144, 0, 0, 255));
+    color: white;
+    border-radius:10px;
+    border: 1px solid #760000;
+    text-shadow: #3e0000 0 -1px 0
+}
+
+QPushButton#backToStartPage
+{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 20px
+}
+
+QPushButton#documentation
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(64, 131, 144, 255), stop:1  rgba(53, 109, 120, 255));
+    color: white;
+    border-radius:10px;
+    border: 1px solid #29545D;
+    text-shadow: #58B3C5 0 -1px 0
+}
+
+QPushButton#documentation
+{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+QPushButton#collapse
+{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding:0em 0.4em;
+}
+
+QPushButton#expand
+{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding:0em 0.5em;
+}
+
+QPushButton#deleteFromTree
+{
+    padding:0em 0.5em;
+}
+
+QPushButton[checkable="true"]
+{
+    font-size: 14px;
+    padding: 2px;
+}
+
+QPushButton[checkable="true"]:open
+{
+    background: gray;
+    color: white;
+    border: 1px solid white;
+}
+
+QPushButton[checkable="true"]:closed
+{
+    background: white;
+    color: black;
+    border: 1px solid gray;
+}
+
+#toolbar
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(103, 103, 103, 255), stop:1  rgba(62, 62, 62, 255));
+    border-bottom:1px #2E2E2E solid;
+}
+
+#reload
+{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px
+}
+
+#save
+{
+    border-radius: 0px;
+}
+
+#saveAs
+{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 20px
+}

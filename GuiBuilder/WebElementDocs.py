@@ -15,9 +15,9 @@ import sys
 import types
 from subprocess import Popen
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from PyQt4.QtWebKit import *
+from PySide.QtCore import *
+from PySide.QtGui import *
+from PySide.QtWebKit import *
 
 import GuiBuilderConfig
 from WebElementDocsView import Ui_MainWindow
