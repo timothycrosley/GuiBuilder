@@ -128,7 +128,23 @@ class GuiBuilder(QMainWindow):
             self.resizeTreeColumns()
             return to_return
 
+        def treeDropMimeData(parent, index, data, action):
+            success =  QTreeWidget.dropMimeData(self.ui.tree, parent, index, data, action)
+            if success:
+                if parent:
+                    if index > 0:
+                        self.selectedKey = int(parent.child(index-1).text(4)) + 1
+                    else:
+                        self.selectedKey = int(parent.text(4)) + 1
+                else:
+                    if index == 0:
+                        self.selectedKey = 0
+                    else:
+                        self.selectedKey = int(self.ui.tree.topLevelItem(index-1).text(4)) + 1
+            return success
+
         self.ui.tree.dropEvent = treeDropEvent
+        self.ui.tree.dropMimeData = treeDropMimeData
         self.ui.tree.setHeaderHidden(False)
         self.ui.continueEditing.hide()
         self.populateRecentlyOpened()
@@ -220,8 +236,14 @@ class GuiBuilder(QMainWindow):
             template.append(str(self.__templateFromTreeNode(self.ui.tree.topLevelItem(topLevelItemIndex))))
 
         template = ''.join(template)
-        if template != self.ui.wuiSHPAML.toPlainText():
+        existing = self.ui.wuiSHPAML.toPlainText().strip()
+        new = template.strip()
+        if existing != new:
+            position = self.ui.wuiSHPAML.textCursor().position()
             self.ui.wuiSHPAML.setText(template)
+            cursor = self.ui.wuiSHPAML.textCursor()
+            cursor.setPosition(position - (len(existing) - len(new)))
+            self.ui.wuiSHPAML.setTextCursor(cursor)
 
     def __templateFromTreeNode(self, node, indentationLevel=1):
         indentation = (indent * indentationLevel) or ""
@@ -318,7 +340,7 @@ class GuiBuilder(QMainWindow):
         newNode.setText(4, self.newElementKey())
         self.resizeTreeColumns()
         if self.selectedKey != None:
-            if newNode.text(4) == self.selectedKey:
+            if int(newNode.text(4)) == int(self.selectedKey):
                 newNode.setSelected(True)
                 self.ui.tree.setCurrentItem(newNode)
                 self.ui.tree.scrollTo(self.ui.tree.currentIndex())
