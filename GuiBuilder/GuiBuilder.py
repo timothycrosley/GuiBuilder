@@ -334,6 +334,7 @@ class GuiBuilder(QMainWindow):
         for childElement in self.structure.childElements:
             self.__convertDictToNode(childElement, self.ui.tree)
         self.ui.tree.expandAll()
+        self.resizeTreeColumns()
 
     def __convertDictToNode(self, structure, node):
         if type(structure) in (str, unicode):
