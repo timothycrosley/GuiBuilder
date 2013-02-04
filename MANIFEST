@@ -131,11 +131,7 @@ GuiBuilder/static/images/popupcal/left1.gif
 GuiBuilder/static/images/popupcal/left2.gif
 GuiBuilder/static/images/popupcal/right1.gif
 GuiBuilder/static/images/popupcal/right2.gif
-GuiBuilder/static/js/HoneyDoes.js
-GuiBuilder/static/js/JavascriptUtils.js
-GuiBuilder/static/js/popcalendar.js
-GuiBuilder/static/js/prototype.js
-GuiBuilder/static/stylesheets/ModelView.css
-GuiBuilder/static/stylesheets/WebElements.css
+GuiBuilder/static/js/WebBot.js
+GuiBuilder/static/stylesheets/WebBot.css
 scripts/guiBuilder
 scripts/webElementDocs

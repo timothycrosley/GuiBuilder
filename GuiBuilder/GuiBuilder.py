@@ -22,25 +22,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 '''
 
-import inspect
 import copy
+import inspect
 import os
 import sys
 import types
-from subprocess import Popen
-
+import WebElements.All as WebElements
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtWebKit import *
+from subprocess import Popen
+from WebElements import shpaml, UITemplate
+from WebElements.DictUtils import OrderedDict
+from WebElements.MultiplePythonSupport import *
 
 import GuiBuilderConfig
-from WebElements.DictUtils import OrderedDict
 from GuiBuilderConfig import indent
 from GuiBuilderView import Ui_MainWindow
+from itertools import chain
 from Session import Session
-from WebElements import UITemplate
-from WebElements import shpaml
-from WebElements.MultiplePythonSupport import *
 
 sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
 
@@ -266,18 +266,18 @@ class GuiBuilder(QMainWindow):
         else:
             node.properties = self.propertyMap.get(unicode(node.text(4)), {})
 
-        accessor = node.properties.pop('accessor', None)
+        accessor = node.properties.get('accessor', None)
         if accessor:
             xml += "@" + accessor
-        nodeID = node.properties.pop('id', None)
+        nodeID = node.properties.get('id', None)
         if nodeID:
             xml += "#" + nodeID
-        classes = node.properties.pop('class', None)
+        classes = node.properties.get('class', None)
         if classes:
             for nodeClass in classes.split(' '):
                 xml += "." + nodeClass
         for propertyName, propertyValue in iteritems(node.properties):
-            if not propertyValue:
+            if not propertyValue or propertyName in ('class', 'id', 'accessor'):
                 continue
 
             propertyValue = unicode(propertyValue).replace("&amp;", "&").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -445,20 +445,12 @@ class GuiBuilder(QMainWindow):
         self.save()
 
     def html(self, elementHtml):
-        html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">'
-        html += "<html>"
-        html += "<head>"
-        for javascript in GuiBuilderConfig.javascriptFiles:
-            html += '<script langauge="javascript" src="' + javascript + '"></script>'
-        for css in GuiBuilderConfig.cssFiles:
-            html += '<link rel="stylesheet" href="' + css + '" type="text/css" />'
-        html += "</head>"
-        html += "<body>"
-        html += elementHtml
-        html += "</body>"
-        html += "</html>"
+        document = WebElements.Document.Document()
+        for resourceFile in chain(GuiBuilderConfig.javascriptFiles, GuiBuilderConfig.cssFiles):
+            document += WebElements.Resources.ResourceFile(file=resourceFile)
+        document += WebElements.Display.StraightHTML(html=elementHtml)
 
-        return html
+        return document.toHTML()
 
     def reloadEverything(self):
         self.refreshPreview()
