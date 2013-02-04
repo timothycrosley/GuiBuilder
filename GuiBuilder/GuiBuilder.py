@@ -1,15 +1,26 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-    Name:
-        GuiBuilder
+'''
+    GuiBuilder.py
 
-    Description:
-        Provides a visual UI from which to build WebElement templates.
+    Provides a visual UI from which to build WebElement templates.
 
-    Lost? For Extensive and up-to-date documentation on GuiBuilder point your browser to:
-        http://wiki.arincdirect.net/bin/view/Adc/GuiBuilder
-"""
+    Copyright (C) 2013  Timothy Edmund Crosley
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+'''
 
 import inspect
 import copy
@@ -29,6 +40,7 @@ from GuiBuilderView import Ui_MainWindow
 from Session import Session
 from WebElements import UITemplate
 from WebElements import shpaml
+from WebElements.MultiplePythonSupport import *
 
 sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
 
@@ -187,7 +199,7 @@ class GuiBuilder(QMainWindow):
 
         self.ui.browserView.setCurrentIndex(1)
         self.ui.searchResults.clear()
-        for productName, product in GuiBuilderConfig.Factory.products.iteritems():
+        for productName, product in iteritems(GuiBuilderConfig.Factory.products):
             if str(text).lower() in str(productName).lower():
                 newElement = QListWidgetItem(self.elementIcon(productName.split('.')[-1]), productName)
                 newElement.setToolTip(product.__doc__ or "")
@@ -264,7 +276,7 @@ class GuiBuilder(QMainWindow):
         if classes:
             for nodeClass in classes.split(' '):
                 xml += "." + nodeClass
-        for propertyName, propertyValue in node.properties.iteritems():
+        for propertyName, propertyValue in iteritems(node.properties):
             if not propertyValue:
                 continue
 
@@ -384,8 +396,8 @@ class GuiBuilder(QMainWindow):
     def open(self):
         fileName = QFileDialog.getOpenFileName(self, "Open WUI(WebElement User Interface) file",
                                                self.getLastOpenedDirectory(), "Files (*.wui);;All Files (*)");
-        if fileName:
-            self.setFile(fileName)
+        if fileName and fileName[0]:
+            self.setFile(fileName[0])
 
     def updateRecent(self, fileName):
         self.session['lastOpenedDirectory'] = os.path.dirname(str(fileName))
@@ -460,7 +472,6 @@ class GuiBuilder(QMainWindow):
         self.updatePreview(False)
 
     def highlightSelected(self, uiStructure, index=0, inTab=None):
-        print uiStructure
         for element in (element for element in uiStructure.childElements or ()
                         if type(element) not in (str, unicode)):
             elementType = element.create.lower()
@@ -498,19 +509,17 @@ class GuiBuilder(QMainWindow):
         try:
             self.structure = UITemplate.fromXML(unicode(self.ui.wuiXML.toPlainText()))
             validTemplate = True
-        except Exception, e:
+        except Exception:
             validTemplate = False
-            print "There was an error converting the template to structure: " + unicode(e)
+            print("There was an error converting the template to structure: " + unicode(e))
 
         if validTemplate:
-            print "Reloading"
             structureCopy = copy.deepcopy(self.structure)
             self.highlightSelected(structureCopy)
             element = GuiBuilderConfig.Factory.buildFromTemplate(structureCopy)
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
-            print self.html(element.toHTML())
             self.ui.preview.setHtml(self.html(element.toHTML()), sharedFilesRoot)
             if redrawTree:
                 self.updateTree()
@@ -542,7 +551,8 @@ class GuiBuilder(QMainWindow):
         properties.update(element.properties)
 
         self.ui.properties.setRowCount(len(properties))
-        for propertyIndex, propertyName, propertyDict in properties.iteritemsWithIndex():
+        for propertyIndex, propertyData in enumerate(iteritems(properties)):
+            (propertyName, propertyDict) = propertyData
             propertyType = propertyDict.get('type', "string")
 
             label = QLabel()
@@ -607,7 +617,7 @@ class GuiBuilder(QMainWindow):
             elementSelector = QListWidget()
             elementSelector.setIconSize(QSize(32, 32))
             elementSelector.setDragDropMode(elementSelector.DragOnly)
-            for productName, product in factory.products.iteritems():
+            for productName, product in iteritems(factory.products):
                 if productName in usedProducts:
                     continue
                 else:

@@ -737,7 +737,7 @@
                      </rect>
                     </property>
                     <attribute name="label">
-                     <string>Page 2</string>
+                     <string/>
                     </attribute>
                    </widget>
                   </widget>

@@ -31,7 +31,6 @@ QPushButton[checkable="false"]
     color: black;
     border-radius:10px;
     border: 1px solid #bebebe;
-    text-shadow: #f7f7f7 0 1px 0;
 }
 
 QPushButton#newTemplate
@@ -40,7 +39,6 @@ QPushButton#newTemplate
     color: white;
     border-radius:10px;
     border: 1px  solid #476F42;
-    text-shadow: #314C2D 0 -1px 0;
 }
 
 QPushButton#backToStartPage, QPushButton#deleteFromTree
@@ -49,7 +47,6 @@ QPushButton#backToStartPage, QPushButton#deleteFromTree
     color: white;
     border-radius:10px;
     border: 1px solid #760000;
-    text-shadow: #3e0000 0 -1px 0
 }
 
 QPushButton#backToStartPage
@@ -66,7 +63,6 @@ QPushButton#documentation
     color: white;
     border-radius:10px;
     border: 1px solid #29545D;
-    text-shadow: #58B3C5 0 -1px 0
 }
 
 QPushButton#documentation

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'GuiBuilder.ui'
 #
-# Created: Sat Feb  2 16:04:57 2013
+# Created: Mon Feb  4 07:56:37 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -536,7 +536,6 @@ class Ui_MainWindow(object):
         self.newTemplate.setProperty("class", QtGui.QApplication.translate("MainWindow", "MainAction", None, QtGui.QApplication.UnicodeUTF8))
         self.saveAs.setText(QtGui.QApplication.translate("MainWindow", "Save as..", None, QtGui.QApplication.UnicodeUTF8))
         self.cancelFilter.setText(QtGui.QApplication.translate("MainWindow", "...", None, QtGui.QApplication.UnicodeUTF8))
-        self.elements.setItemText(self.elements.indexOf(self.page_4), QtGui.QApplication.translate("MainWindow", "Page 2", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_3.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background:white;", None, QtGui.QApplication.UnicodeUTF8))
         self.expand.setText(QtGui.QApplication.translate("MainWindow", "+", None, QtGui.QApplication.UnicodeUTF8))
         self.collapse.setText(QtGui.QApplication.translate("MainWindow", "-", None, QtGui.QApplication.UnicodeUTF8))
