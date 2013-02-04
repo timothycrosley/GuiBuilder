@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='GuiBuilder',
-      version='0.5.0',
+      version='0.5.1',
       description='A drag and drop interface to create WebElement UI templates quickly and easily.',
       author='Timothy Crosley',
       author_email='timothy.crosley@gmail.com',
