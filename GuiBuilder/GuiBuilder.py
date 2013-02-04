@@ -175,7 +175,7 @@ class GuiBuilder(QMainWindow):
         self.ui.tree.setCurrentItem(self.ui.tree.findItems(selected, Qt.MatchExactly | Qt.MatchRecursive, 4)[0])
 
     def startDocBrowser(self):
-        Popen("webElementDocs")
+        Popen("webElementDocs", cwd=os.path.expanduser('~'))
 
     def populateRecentlyOpened(self):
         recentlyOpened = self.session.get('recentlyOpenedFiles', [])
