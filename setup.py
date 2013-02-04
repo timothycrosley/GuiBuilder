@@ -8,7 +8,7 @@ setup(name='GuiBuilder',
       author='Timothy Crosley',
       author_email='timothy.crosley@gmail.com',
       url='http://www.guibuilder.net/',
-      download_url='https://github.com/timothycrosley/GuiBuilder/blob/master/dist/GuiBuilder-0.5.0.tar.gz?raw=true',
+      download_url='https://github.com/timothycrosley/GuiBuilder/blob/master/dist/GuiBuilder-0.5.1.tar.gz?raw=true',
       license = "GNU GPLv2",
       scripts=['scripts/guiBuilder', 'scripts/webElementDocs'],
       requires=['webelements'], # Technically requires pyside but native install of this is preferred
