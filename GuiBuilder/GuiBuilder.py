@@ -122,10 +122,13 @@ class GuiBuilder(QMainWindow):
                      self.refreshPreviewKeepTree)
         self.connect(self.ui.expand, SIGNAL("clicked()"), self.ui.tree.expandAll)
         self.connect(self.ui.collapse, SIGNAL("clicked()"), self.ui.tree.collapseAll)
-        self.connect(self.ui.deleteFromTree, SIGNAL("clicked()"), self.deleteFromTree)
         self.connect(self.ui.reload, SIGNAL("clicked()"), self.reloadEverything)
         self.connect(self.ui.filter, SIGNAL('textChanged(const QString &)'), self.filterItemBrowser)
+        self.connect(self.ui.filterProperties, SIGNAL('textChanged(const QString &)'), self.filterProperties)
+        self.connect(self.ui.filterTree, SIGNAL('textChanged(const QString &)'), self.filterTree)
         self.connect(self.ui.cancelFilter, SIGNAL("clicked()"), self.clearFilter)
+        self.connect(self.ui.cancelPropertyFilter, SIGNAL("clicked()"), self.clearPropertyFilter)
+        self.connect(self.ui.cancelTreeFilter, SIGNAL("clicked()"), self.clearTreeFilter)
         self.connect(self.ui.continueEditing, SIGNAL("clicked()"), self.gotoEditPage)
         self.connect(self.ui.baseLayout, SIGNAL("currentIndexChanged(const QString &)"), self.convertTreeToTemplate)
         self.connect(self.ui.recentlyOpened, SIGNAL("currentIndexChanged(const QString &)"), self.openRecent)
@@ -155,13 +158,22 @@ class GuiBuilder(QMainWindow):
                         self.selectedKey = int(self.ui.tree.topLevelItem(index-1).text(4)) + 1
             return success
 
+        def keyPressOverride(evt):
+            if evt.key() == Qt.Key_Delete:
+                self.deleteFromTree()
+
+            QTreeWidget.keyPressEvent(self.ui.tree, evt)
+
         self.ui.tree.dropEvent = treeDropEvent
         self.ui.tree.dropMimeData = treeDropMimeData
+        self.ui.tree.keyPressEvent = keyPressOverride
         self.ui.tree.setHeaderHidden(False)
         self.ui.continueEditing.hide()
         self.populateRecentlyOpened()
 
         self.ui.cancelFilter.hide()
+        self.ui.cancelPropertyFilter.hide()
+        self.ui.cancelTreeFilter.hide()
 
     def resizeTreeColumns(self):
         for column in xrange(4):
@@ -192,6 +204,14 @@ class GuiBuilder(QMainWindow):
     def clearFilter(self):
         self.ui.filter.setText('')
 
+    def clearPropertyFilter(self):
+        self.ui.filterProperties.setText('')
+        self.ui.filterProperties.setFocus()
+
+    def clearTreeFilter(self):
+        self.ui.filterTree.setText('')
+        self.ui.filterTree.setFocus()
+
     def filterItemBrowser(self, text):
         if not text:
             self.ui.cancelFilter.hide()
@@ -206,6 +226,46 @@ class GuiBuilder(QMainWindow):
                 newElement.properties = {}
                 self.ui.searchResults.addItem(newElement)
         self.ui.cancelFilter.show()
+
+    def filterProperties(self, text):
+        if not text:
+            self.ui.cancelPropertyFilter.hide()
+            for row in xrange(self.ui.properties.rowCount()):
+                self.ui.properties.setRowHidden(row, False)
+        else:
+            for row in xrange(self.ui.properties.rowCount()):
+                self.ui.cancelPropertyFilter.show()
+                self.ui.properties.setRowHidden(row, True)
+                for col in xrange(self.ui.properties.columnCount()):
+                    item = self.ui.properties.cellWidget(row, col)
+                    if item:
+                        if text.lower() in item.text().lower():
+                            self.ui.properties.setRowHidden(row, False)
+
+        self.ui.properties.resizeColumnsToContents()
+        self.ui.properties.resizeRowsToContents()
+
+    def filterTree(self, text):
+        if not text:
+            self.ui.cancelTreeFilter.hide()
+            iterator = QTreeWidgetItemIterator(self.ui.tree)
+            while iterator.value():
+                item = iterator.value()
+                iterator += 1
+                item.setHidden(False)
+        else:
+            iterator = QTreeWidgetItemIterator(self.ui.tree)
+            while iterator.value():
+                item = iterator.value()
+                iterator += 1
+                item.setHidden(True)
+                for column in xrange(5):
+                    if text.lower() in item.text(column).lower():
+                        item.setHidden(False)
+                        parent = item.parent()
+                        while parent:
+                            parent.setHidden(False)
+                            parent = parent.parent()
 
     def deleteFromTree(self):
         selectedItems = self.ui.tree.selectedItems()
@@ -225,8 +285,9 @@ class GuiBuilder(QMainWindow):
             else:
                 for topLevelItemIndex in xrange(self.ui.tree.topLevelItemCount()):
                     topLevelItem = self.ui.tree.topLevelItem(topLevelItemIndex)
-                    if topLevelItem == item:
-                        self.ui.tree.takeTopLevelItem(topLevelItemIndex)
+                    if topLevelItem:
+                        if topLevelItem.text(4) == item.text(4):
+                            self.ui.tree.takeTopLevelItem(topLevelItemIndex)
 
         self.unselectCurrentElement()
         self.convertTreeToTemplate()
@@ -558,8 +619,12 @@ class GuiBuilder(QMainWindow):
             self.ui.properties.setCellWidget(propertyIndex, 1, controller.widget)
             self.propertyControls[propertyName] = controller
 
-        self.ui.properties.resizeColumnsToContents()
-        self.ui.properties.resizeRowsToContents()
+        filterText = self.ui.filterProperties.text()
+        if filterText:
+            self.filterProperties(filterText)
+        else:
+            self.ui.properties.resizeColumnsToContents()
+            self.ui.properties.resizeRowsToContents()
 
     def updateDocumentation(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:
