@@ -613,6 +613,7 @@ class GuiBuilder(QMainWindow):
 
             label = QLabel()
             label.setText(propertyName[0].upper() + propertyName[1:] + ": ")
+            label.setToolTip(propertyDict.get('info', label.text()))
             self.ui.properties.setCellWidget(propertyIndex,  0, label)
 
             controller = PropertyController(unicode(item.text(4)), propertyName, propertyType, self)
