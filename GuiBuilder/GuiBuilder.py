@@ -527,9 +527,10 @@ class GuiBuilder(QMainWindow):
         self.oldTemplate = None
         self.updatePreview(False)
 
-    def highlightSelected(self, uiStructure, index=0, inTab=None):
-        for element in (element for element in uiStructure.childElements or ()
-                        if type(element) not in (str, unicode)):
+    def highlightSelected(self, uiStructure, index=0, inTab=None, inStack=None, setStack=False):
+        setStackNextLoop = False
+        for nestedIndex, element in enumerate((element for element in uiStructure.childElements or ()
+                                              if type(element) not in (str, unicode))):
             elementType = element.create.lower()
             element.properties = dict(element.properties)
             properties = element.properties
@@ -537,13 +538,19 @@ class GuiBuilder(QMainWindow):
                                                                      (index, properties.get('onclick', '')))
             if 'field' in elementType:
                 properties.setdefault('userInput.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                                   (index, properties.get('onclick', '')))
+                                                                             (index, properties.get('onclick', '')))
                 properties.setdefault('label.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                               (index, properties.get('onclick', '')))
+                                                                             (index, properties.get('onclick', '')))
             elif 'tab' == elementType:
                 inTab = element
                 properties.setdefault('tabLabel.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
-                                                                               (index, properties.get('onclick', '')))
+                                                                             (index, properties.get('onclick', '')))
+            elif 'stack' == elementType:
+                inStack = [element, None]
+                setStackNextLoop = True
+            elif setStack:
+                inStack[1] = nestedIndex
+
             if index == int(self.selectedKey or -1):
                 if 'field' in elementType:
                     properties['labelStyle'] = "border:2px blue dashed;" + properties.get('labelStyle', '')
@@ -552,9 +559,11 @@ class GuiBuilder(QMainWindow):
                     properties['select'] = True
                 elif inTab:
                     inTab.properties['select'] = True
+                elif inStack and inStack[1]:
+                    inStack[0].properties['index'] = inStack[1]
                 properties['style'] = "border:2px blue dashed;" + properties.get('style', '')
             index += 1
-            index = self.highlightSelected(element, index, inTab)
+            index = self.highlightSelected(element, index, inTab, inStack, setStackNextLoop)
         return index
 
     def updatePreview(self, redrawTree=True):
