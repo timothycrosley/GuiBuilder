@@ -541,11 +541,11 @@ class GuiBuilder(QMainWindow):
                                                                              (index, properties.get('onclick', '')))
                 properties.setdefault('label.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
                                                                              (index, properties.get('onclick', '')))
-            elif 'tab' == elementType:
+            elif elementType in ('tab', 'containers-tab'):
                 inTab = element
                 properties.setdefault('tabLabel.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
                                                                              (index, properties.get('onclick', '')))
-            elif 'stack' == elementType:
+            elif elementType in ('stack', 'layout-stack'):
                 inStack = [element, None]
                 setStackNextLoop = True
             elif setStack:
@@ -555,7 +555,7 @@ class GuiBuilder(QMainWindow):
                 if 'field' in elementType:
                     properties['labelStyle'] = "border:2px blue dashed;" + properties.get('labelStyle', '')
 
-                if 'tab' == elementType:
+                if elementType in ('tab', 'containers-tab'):
                     properties['select'] = True
                 elif inTab:
                     inTab.properties['select'] = True
