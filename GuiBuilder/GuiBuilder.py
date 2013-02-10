@@ -106,6 +106,7 @@ class GuiBuilder(QMainWindow):
         self.currentElementKey = 0
         self.selectedKey = None
         self.propertyControls = {}
+        self.lastSaved = ""
 
         self.connect(self.ui.newTemplate, SIGNAL('clicked()'), self.newTemplate)
         self.connect(self.ui.backToStartPage, SIGNAL('clicked()'), self.backToStartPage)
@@ -300,6 +301,7 @@ class GuiBuilder(QMainWindow):
 
     def updateXML(self):
         self.ui.wuiXML.setText(shpaml.convert_text(self.ui.wuiSHPAML.toPlainText()))
+        self.updateSaveIndicator()
 
     def convertTreeToTemplate(self):
         baseTag = str(self.ui.baseLayout.currentText()).lower()
@@ -399,6 +401,14 @@ class GuiBuilder(QMainWindow):
         if self.ui.tree.currentIndex():
             self.ui.tree.scrollTo(self.ui.tree.currentIndex())
 
+        self.updateSaveIndicator()
+
+    def updateSaveIndicator(self):
+        if self.currentFile and self.lastSaved != self.ui.wuiSHPAML.toPlainText():
+            self.ui.save.setEnabled(True)
+        else:
+            self.ui.save.setEnabled(False)
+
     def __convertDictToNode(self, structure, node):
         if type(structure) in (str, unicode):
             return
@@ -482,6 +492,7 @@ class GuiBuilder(QMainWindow):
         templateFile.close()
 
         self.ui.wuiSHPAML.setText(template)
+        self.lastSaved = template
         self.setCurrentFile(fileName)
 
         self.gotoEditPage()
@@ -490,8 +501,12 @@ class GuiBuilder(QMainWindow):
         if not self.currentFile:
             self.saveAs()
 
+        template = self.ui.wuiSHPAML.toPlainText()
         with open(self.currentFile, 'w') as wuiFile:
-            wuiFile.write(self.ui.wuiSHPAML.toPlainText())
+            wuiFile.write(template)
+
+        self.lastSaved = template
+        self.updateSaveIndicator()
 
         if GuiBuilderConfig.onSave:
             Popen(GuiBuilderConfig.onSave, shell=True)
@@ -507,7 +522,6 @@ class GuiBuilder(QMainWindow):
             fileName = fileName + ".wui"
 
         self.setCurrentFile(fileName)
-        self.ui.save.setEnabled(True)
         self.save()
 
     def html(self, elementHtml):
@@ -593,6 +607,8 @@ class GuiBuilder(QMainWindow):
                 self.disconnect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
                 self.convertTreeToTemplate()
                 self.connect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
+
+        self.updateSaveIndicator()
 
     def updateProperties(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:
