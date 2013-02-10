@@ -492,7 +492,9 @@ class GuiBuilder(QMainWindow):
 
         with open(self.currentFile, 'w') as wuiFile:
             wuiFile.write(self.ui.wuiSHPAML.toPlainText())
-        Popen("webkit", shell=True)
+
+        if GuiBuilderConfig.onSave:
+            Popen(GuiBuilderConfig.onSave, shell=True)
 
     def saveAs(self):
         fileName = QFileDialog.getSaveFileName(self, "Save to WUI(WebElement User Interface) file",

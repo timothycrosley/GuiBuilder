@@ -28,6 +28,7 @@ import WebElements.All as WebElements
 
 sharedFilesRoot = os.environ.get("GUI_BUILDER_SHARED_FILES_ROOT",
                                  (os.path.dirname(__file__) or ".") + "/static/")
+onSave = os.environ.get("GUI_BUILDER_ON_SAVE", None)
 indent = " "
 
 WebElements.Fields.Factory.products.pop('field', None)
@@ -85,3 +86,4 @@ cssFiles = glob.glob(sharedFilesRoot + "**/*.css")
 
 Factory = WebElements.FactoryClasses.Composite(factories)
 WebElements.Display.Factory.addProduct(WebElements.Base.Invalid)
+
