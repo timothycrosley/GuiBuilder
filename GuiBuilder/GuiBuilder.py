@@ -35,6 +35,7 @@ from subprocess import Popen
 from WebElements import shpaml, UITemplate
 from WebElements.DictUtils import OrderedDict
 from WebElements.MultiplePythonSupport import *
+from WebElements.Base import TextNode
 
 import GuiBuilderConfig
 from GuiBuilderConfig import indent
@@ -43,6 +44,36 @@ from itertools import chain
 from Session import Session
 
 sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
+
+
+class TextEditDialog(QDialog):
+
+    def __init__(self, parent=None, currentText=""):
+        super(TextEditDialog, self).__init__(parent)
+
+        self.oldText = currentText
+        self.edit = QTextEdit(currentText)
+        self.button = QPushButton("Save")
+        self.button.setObjectName("saveProperty")
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.edit)
+        layout.addWidget(self.button)
+
+        self.setLayout(layout)
+        self.button.clicked.connect(self.success)
+        self.edit.setFocus()
+
+    def success(self):
+        return self.done(QDialog.Accepted)
+
+    @classmethod
+    def getText(cls, parentDisplay, currentText=""):
+        dialog = cls(parentDisplay, currentText)
+        if not dialog.exec_() == QDialog.Accepted:
+            return dialog.oldText
+        return dialog.edit.toPlainText().replace("\n", "<br/>")
+
 
 class PropertyController(QObject):
 
@@ -58,7 +89,24 @@ class PropertyController(QObject):
             self.propertyName = propertyName
             self.propertyType = propertyType
             self.builder = builder
+
             self.widget = self.createWidget()
+            self.extendedEdit = self.createExtendedEdit()
+            self.extendedEdit.setObjectName("extendedEdit")
+            self.extendedEdit.setMaximumWidth(20)
+            self.extendedEdit.setMinimumWidth(20)
+
+
+        def createExtendedEdit(self):
+            result = QLabel()
+            if self.propertyType == "string":
+                result = QPushButton("...")
+
+                self.connect(result, SIGNAL("clicked()"), self.updateText)
+            return result
+
+        def updateText(self):
+            self.widget.setText(TextEditDialog.getText(self.builder, self.widget.text()))
 
         def createWidget(self):
             value = self.builder.propertyMap[self.elementKey].get(self.propertyName, None)
@@ -222,7 +270,7 @@ class GuiBuilder(QMainWindow):
         self.ui.searchResults.clear()
         for productName, product in iteritems(GuiBuilderConfig.Factory.products):
             if str(text).lower() in str(productName).lower():
-                newElement = QListWidgetItem(self.elementIcon(productName.split('.')[-1]), productName)
+                newElement = QListWidgetItem(self.elementIcon(productName), productName)
                 newElement.setToolTip(product.__doc__ or "")
                 newElement.properties = {}
                 self.ui.searchResults.addItem(newElement)
@@ -243,8 +291,7 @@ class GuiBuilder(QMainWindow):
                         if text.lower() in item.text().lower():
                             self.ui.properties.setRowHidden(row, False)
 
-        self.ui.properties.resizeColumnsToContents()
-        self.ui.properties.resizeRowsToContents()
+        self.resetPropertyLayout()
 
     def filterTree(self, text):
         if not text:
@@ -323,12 +370,16 @@ class GuiBuilder(QMainWindow):
     def __templateFromTreeNode(self, node, indentationLevel=1):
         indentation = (indent * indentationLevel) or ""
         childCount = node.childCount()
-        xml = indentation + (childCount == 0 and "> " or "") + node.text(0)
         if node.text(0) == "label":
             node.properties = self.propertyMap.get(unicode(node.text(4)), {'text':'Label'})
         else:
             node.properties = self.propertyMap.get(unicode(node.text(4)), {})
 
+        if node.text(0) == "textnode":
+            xml = indentation + node.properties.get('text', '')
+            return xml
+
+        xml = indentation + (childCount == 0 and "> " or "") + node.text(0)
         accessor = node.properties.get('accessor', None)
         if accessor:
             xml += "@" + accessor
@@ -411,7 +462,7 @@ class GuiBuilder(QMainWindow):
 
     def __convertDictToNode(self, structure, node):
         if type(structure) in (str, unicode):
-            return
+            structure = UITemplate.Template('textnode', properties=(('text', structure),))
 
         create = structure.create
         if not create:
@@ -440,7 +491,7 @@ class GuiBuilder(QMainWindow):
             self.__convertDictToNode(childElement, newNode)
 
     def elementIcon(self, elementName):
-        iconName = "icons/elements/" + elementName.split('.')[-1].lower() + ".png"
+        iconName = "icons/elements/" + elementName.split('-')[-1].lower() + ".png"
         if os.path.isfile(iconName):
             return QIcon(iconName)
         else:
@@ -592,7 +643,7 @@ class GuiBuilder(QMainWindow):
             validTemplate = True
         except Exception:
             validTemplate = False
-            print("There was an error converting the template to structure: " + unicode(e))
+            print("There was an error converting the template to structure")
 
         if validTemplate:
             structureCopy = copy.deepcopy(self.structure)
@@ -620,18 +671,20 @@ class GuiBuilder(QMainWindow):
         self.selectedKey = item.text(4)
 
         self.ui.properties.clear()
-        self.ui.properties.setColumnCount(2)
-        self.ui.properties.setHorizontalHeaderLabels(['Name', 'Value'])
+        self.ui.properties.setColumnCount(3)
+        self.ui.properties.setHorizontalHeaderLabels(['Name', 'Value', ''])
 
         elementName = unicode(item.text(0)).lower()
-        element = GuiBuilderConfig.Factory.products[elementName]
-
-        properties = OrderedDict()
-        properties['accessor'] = {}
-        properties['id'] = {}
-        properties['name'] = {}
-        properties['create'] = {}
-        properties.update(element.properties)
+        if elementName == "textnode":
+            properties = {'text':{}}
+        else:
+            properties = OrderedDict()
+            properties['accessor'] = {}
+            properties['id'] = {}
+            properties['name'] = {}
+            properties['create'] = {}
+            element = GuiBuilderConfig.Factory.products[elementName]
+            properties.update(element.properties)
 
         self.ui.properties.setRowCount(len(properties))
         for propertyIndex, propertyData in enumerate(iteritems(properties)):
@@ -645,14 +698,21 @@ class GuiBuilder(QMainWindow):
 
             controller = PropertyController(unicode(item.text(4)), propertyName, propertyType, self)
             self.ui.properties.setCellWidget(propertyIndex, 1, controller.widget)
+            self.ui.properties.setCellWidget(propertyIndex, 2, controller.extendedEdit)
+
             self.propertyControls[propertyName] = controller
 
         filterText = self.ui.filterProperties.text()
         if filterText:
             self.filterProperties(filterText)
         else:
-            self.ui.properties.resizeColumnsToContents()
-            self.ui.properties.resizeRowsToContents()
+            self.resetPropertyLayout()
+
+    def resetPropertyLayout(self):
+        self.ui.properties.setColumnWidth(0, 120)
+        self.ui.properties.setColumnWidth(1, 140)
+        self.ui.properties.setColumnWidth(2, 20)
+        self.ui.properties.resizeRowsToContents()
 
     def updateDocumentation(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:

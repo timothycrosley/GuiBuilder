@@ -32,13 +32,21 @@ QPushButton[checkable="false"]
     border-radius:10px;
     border: 1px solid #bebebe;
 }
+QPushButton[checkable="false"]:hover
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(215, 215, 215, 255), stop:1  rgba(190, 190, 190, 255));
+}
 
-QPushButton#newTemplate
+QPushButton#newTemplate, QPushButton#saveProperty
 {
     background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(102, 159, 95, 255), stop:1  rgba(82, 127, 76, 255));
     color: white;
     border-radius:10px;
     border: 1px  solid #476F42;
+}
+QPushButton#newTemplate:hover, QPushButton#saveProperty:hover
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(92, 143, 85, 255), stop:1  rgba(71, 111, 66, 255));
 }
 
 QPushButton#backToStartPage, QPushButton#deleteFromTree
@@ -47,6 +55,10 @@ QPushButton#backToStartPage, QPushButton#deleteFromTree
     color: white;
     border-radius:10px;
     border: 1px solid #760000;
+}
+QPushButton#backToStartPage:hover, QPushButton#deleteFromTree:hover
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(170, 0, 0, 255), stop:1  rgba(118, 0, 0, 255));
 }
 
 QPushButton#backToStartPage
@@ -63,6 +75,12 @@ QPushButton#documentation
     color: white;
     border-radius:10px;
     border: 1px solid #29545D;
+}
+
+QPushButton#documentation:hover
+{
+    background:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(54, 131, 134, 255), stop:1  rgba(43, 99, 110, 255));
+
 }
 
 QPushButton#documentation
@@ -105,11 +123,26 @@ QPushButton[checkable="true"]:open
     border: 1px solid white;
 }
 
+QPushButton[checkable="true"]:hover
+{
+    background: #585858;
+}
+
 QPushButton[checkable="true"]:closed
 {
     background: white;
     color: black;
     border: 1px solid gray;
+}
+QPushButton[checkable="true"]:closed:hover
+{
+    background: #BABABA;
+}
+
+QPushButton#extendedEdit
+{
+    padding: 0px;
+    font-size: 12px;
 }
 
 #toolbar

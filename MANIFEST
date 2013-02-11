@@ -92,13 +92,17 @@ GuiBuilder/icons/elements/travelermodel.png
 GuiBuilder/icons/elements/vertical.png
 GuiBuilder/icons/elements/verticalrule.png
 GuiBuilder/icons/sections/buttons.png
+GuiBuilder/icons/sections/charts.png
 GuiBuilder/icons/sections/containers.png
 GuiBuilder/icons/sections/createfpl.png
 GuiBuilder/icons/sections/createtrip.png
 GuiBuilder/icons/sections/dataviews.png
 GuiBuilder/icons/sections/display.png
 GuiBuilder/icons/sections/document.png
+GuiBuilder/icons/sections/documentation.png
+GuiBuilder/icons/sections/dom.png
 GuiBuilder/icons/sections/fields.png
+GuiBuilder/icons/sections/graghs.png
 GuiBuilder/icons/sections/hiddeninputs.png
 GuiBuilder/icons/sections/inputs.png
 GuiBuilder/icons/sections/layout.png
