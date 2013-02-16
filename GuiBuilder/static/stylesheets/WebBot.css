@@ -1082,7 +1082,7 @@ label.WInfo {
   width: 100%;
 }
 
-/* line 4, ../sass/WebElementStructureWithButtons.sass */
+/* line 23, ../sass/WebElementStructureWithButtons.sass */
 input[type=button], input[type=submit] {
   font-size: 19px;
   padding: 0.3em 1.5em;
@@ -1140,7 +1140,7 @@ input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 6, ../sass/WebElementStructureWithButtons.sass */
+/* line 25, ../sass/WebElementStructureWithButtons.sass */
 input[type=button].MainAction, input[type=submit].MainAction {
   font-size: 19px;
   padding: 0.3em 1.5em;
@@ -1198,7 +1198,7 @@ input[type=button].MainAction::-moz-focus-inner, input[type=submit].MainAction::
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 8, ../sass/WebElementStructureWithButtons.sass */
+/* line 27, ../sass/WebElementStructureWithButtons.sass */
 input[type=button].DeleteAction, input[type=submit].DeleteAction {
   font-size: 19px;
   padding: 0.3em 1.5em;
@@ -1256,7 +1256,7 @@ input[type=button].DeleteAction::-moz-focus-inner, input[type=submit].DeleteActi
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 10, ../sass/WebElementStructureWithButtons.sass */
+/* line 29, ../sass/WebElementStructureWithButtons.sass */
 input[type=button].WToggleButton, input[type=submit].WToggleButton {
   font-size: 19px;
   padding: 0.3em 1.5em;
@@ -1314,7 +1314,7 @@ input[type=button].WToggleButton::-moz-focus-inner, input[type=submit].WToggleBu
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 12, ../sass/WebElementStructureWithButtons.sass */
+/* line 31, ../sass/WebElementStructureWithButtons.sass */
 input[type=button].WToggleButton.Pushed, input[type=submit].WToggleButton.Pushed {
   -webkit-box-shadow: #333333 0 0.2em 0.4em inset;
   -moz-box-shadow: #333333 0 0.2em 0.4em inset;
@@ -1327,7 +1327,7 @@ input[type=button].WToggleButton.Pushed:active, input[type=submit].WToggleButton
   -moz-box-shadow: #282828 0 0.2em 0.4em inset;
   box-shadow: #282828 0 0.2em 0.4em inset;
 }
-/* line 14, ../sass/WebElementStructureWithButtons.sass */
+/* line 34, ../sass/WebElementStructureWithButtons.sass */
 input[type=button][disabled], input[type=submit][disabled] {
   -webkit-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
   -moz-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
@@ -1343,11 +1343,24 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   -moz-box-shadow: #616161 0 0.2em 0.4em inset;
   box-shadow: #616161 0 0.2em 0.4em inset;
 }
-/* line 17, ../sass/WebElementStructureWithButtons.sass */
+/* line 36, ../sass/WebElementStructureWithButtons.sass */
 input[type=button][disabled]:active, input[type=submit][disabled]:active {
   -webkit-box-shadow: white 1px 1px 1px 1px;
   -moz-box-shadow: white 1px 1px 1px 1px;
   box-shadow: white 1px 1px 1px 1px;
+}
+
+/* line 40, ../sass/WebElementStructureWithButtons.sass */
+.WButtonGroup input[type=button], .WButtonGroup input[type=submit] {
+  border-radius: 0px;
+}
+/* line 43, ../sass/WebElementStructureWithButtons.sass */
+.WButtonGroup WFirst input[type=button], .WButtonGroup WFirst input[type=submit] {
+  border-radius: 8px 0px 0px 8px;
+}
+/* line 46, ../sass/WebElementStructureWithButtons.sass */
+.WButtonGroup .WLast input[type=button], .WButtonGroup .WLast input[type=submit] {
+  border-radius: 0px 8px 8px 0px;
 }
 
 /* line 5, ../sass/_Fonts.sass */
