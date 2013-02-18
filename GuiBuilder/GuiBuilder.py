@@ -780,13 +780,16 @@ class GuiBuilder(QMainWindow):
 
 
 def run():
+    openFile = ""
+    if len(sys.argv) > 1:
+        openFile = os.path.abspath(sys.argv[1])
     os.chdir(os.path.dirname(__file__) or ".")
     app = QApplication(sys.argv)
     with open("GuiBuilder.css") as cssFile:
         app.setStyleSheet(cssFile.read())
     window = GuiBuilder()
-    if len(sys.argv) > 1:
-        window.setFile(sys.argv[1])
+    if openFile:
+        window.setFile(openFile)
     window.resize(1024, 768)
     window.show()
 
