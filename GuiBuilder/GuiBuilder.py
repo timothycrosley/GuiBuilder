@@ -27,6 +27,7 @@ import inspect
 import os
 import sys
 import types
+from glob import glob
 import WebElements.All as WebElements
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -43,7 +44,8 @@ from GuiBuilderView import Ui_MainWindow
 from itertools import chain
 from Session import Session
 
-sharedFilesRoot = QUrl.fromLocalFile(GuiBuilderConfig.sharedFilesRoot)
+sharedFilesRoot = GuiBuilderConfig.sharedFilesRoot
+LAUNCH_DIRECTORY = os.getcwd()
 
 
 class TextEditDialog(QDialog):
@@ -498,6 +500,7 @@ class GuiBuilder(QMainWindow):
             return self.genericElementIcon
 
     def newTemplate(self):
+        sharedFilesRoot = autoFindStatic(LAUNCH_DIRECTORY)
         self.setCurrentFile(None)
         self.ui.wuiXML.setText('<flow>\n</flow>')
         self.gotoEditPage()
@@ -538,9 +541,12 @@ class GuiBuilder(QMainWindow):
         self.session.save()
 
     def setFile(self, fileName):
+        global sharedFilesRoot
         templateFile = open(fileName, 'r')
         template = templateFile.read()
         templateFile.close()
+
+        sharedFilesRoot = autoFindStatic(os.path.realpath(fileName))
 
         self.ui.wuiSHPAML.setText(template)
         self.lastSaved = template
@@ -577,8 +583,15 @@ class GuiBuilder(QMainWindow):
 
     def html(self, elementHtml):
         document = WebElements.Document.Document()
-        for resourceFile in chain(GuiBuilderConfig.javascriptFiles, GuiBuilderConfig.cssFiles):
-            document += WebElements.Resources.ResourceFile(file=resourceFile)
+
+        if sharedFilesRoot != GuiBuilderConfig.sharedFilesRoot:
+            resourceFiles = []
+            for resourceFile in chain(glob(sharedFilesRoot + "/*.css"), glob(sharedFilesRoot + "/*/*.css"),
+                                  glob(sharedFilesRoot + "/*.js"), glob(sharedFilesRoot + "/*/*.js")):
+                document += WebElements.Resources.ResourceFile(file=resourceFile)
+        else:
+            for resourceFile in chain(GuiBuilderConfig.javascriptFiles, GuiBuilderConfig.cssFiles):
+                document += WebElements.Resources.ResourceFile(file=resourceFile)
         document += WebElements.Display.StraightHTML(html=elementHtml)
 
         return document.toHTML()
@@ -652,7 +665,7 @@ class GuiBuilder(QMainWindow):
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
-            self.ui.preview.setHtml(self.html(element.toHTML()), sharedFilesRoot)
+            self.ui.preview.setHtml(self.html(element.toHTML()), QUrl.fromLocalFile(sharedFilesRoot + "/"))
             if redrawTree:
                 self.updateTree()
                 self.disconnect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
@@ -778,11 +791,26 @@ class GuiBuilder(QMainWindow):
 
             self.ui.elements.addItem(elementSelector, icon, section)
 
+def autoFindStatic(directory, default=GuiBuilderConfig.sharedFilesRoot, numTries=0):
+    if numTries == 5:
+        return default
+    elif numTries == 0:
+        directory = os.path.dirname(directory)
+
+    result = glob(os.path.join(directory, 'static'))
+    if result:
+        return os.path.realpath(result[0])
+
+    return autoFindStatic(os.path.join(directory, os.path.pardir), default, numTries=numTries+1)
+
 
 def run():
     openFile = ""
     if len(sys.argv) > 1:
         openFile = os.path.abspath(sys.argv[1])
+
+    global sharedFilesRoot
+    sharedFilesRoot = autoFindStatic(LAUNCH_DIRECTORY)
     os.chdir(os.path.dirname(__file__) or ".")
     app = QApplication(sys.argv)
     with open("GuiBuilder.css") as cssFile:
