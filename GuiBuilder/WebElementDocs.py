@@ -32,9 +32,10 @@ from subprocess import Popen
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtWebKit import *
+from WebElements.MultiplePythonSupport import *
 
-import GuiBuilderConfig
-from WebElementDocsView import Ui_MainWindow
+from . import GuiBuilderConfig
+from .WebElementDocsView import Ui_MainWindow
 
 class WebElementDocs(QMainWindow):
 
@@ -103,7 +104,7 @@ class WebElementDocs(QMainWindow):
 
         self.ui.browserView.setCurrentIndex(1)
         self.ui.searchResults.clear()
-        for productName, product in GuiBuilderConfig.Factory.products.iteritems():
+        for productName, product in iteritems(GuiBuilderConfig.Factory.products):
             if str(text).lower() in str(productName).lower():
                 newElement = QListWidgetItem(self.elementIcon(productName.split('.')[-1]), productName)
                 newElement.setToolTip(product.__doc__ or "")
@@ -134,7 +135,7 @@ class WebElementDocs(QMainWindow):
                      self.updateDocumentation)
             elementSelector.setIconSize(QSize(32, 32))
             elementSelector.setDragDropMode(elementSelector.DragOnly)
-            for productName, product in factory.products.iteritems():
+            for productName, product in iteritems(factory.products):
                 if productName in usedProducts:
                     continue
                 else:

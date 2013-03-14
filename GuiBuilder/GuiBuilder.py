@@ -447,7 +447,7 @@ class GuiBuilder(QMainWindow):
                 break
         self.connect(self.ui.baseLayout, SIGNAL("currentIndexChanged(const QString &)"), self.convertTreeToTemplate)
 
-        for childElement in self.structure.childElements:
+        for childElement in (self.structure and self.structure.childElements or ()):
             self.__convertDictToNode(childElement, self.ui.tree)
         self.ui.tree.expandAll()
         self.resizeTreeColumns()
