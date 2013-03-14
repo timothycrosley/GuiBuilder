@@ -1082,6 +1082,17 @@ label.WInfo {
   width: 100%;
 }
 
+/* line 397, ../sass/WebElementStructure.sass */
+.WGooglePlusBadge {
+  text-decoration: none;
+}
+/* line 399, ../sass/WebElementStructure.sass */
+.WGooglePlusBadge img {
+  border: 0;
+  width: 32px;
+  height: 32px;
+}
+
 /* line 23, ../sass/WebElementStructureWithButtons.sass */
 input[type=button], input[type=submit] {
   font-size: 19px;
@@ -1352,7 +1363,7 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
 
 /* line 40, ../sass/WebElementStructureWithButtons.sass */
 .WButtonGroup input[type=button], .WButtonGroup input[type=submit] {
-  border-radius: 0px;
+  border-radius: 0px 0px 0px 0px;
 }
 /* line 43, ../sass/WebElementStructureWithButtons.sass */
 .WButtonGroup .WFirst input[type=button], .WButtonGroup .WFirst input[type=submit] {

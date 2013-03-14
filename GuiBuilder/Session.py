@@ -46,9 +46,9 @@ class Session(dict):
                     self.update(pickle.loads(bytes(sessionFile.read(), 'utf8')))
                 else:
                     self.update(pickle.loads(sessionFile.read()))
-            except ImportError:
+            except Exception:
                 pass
 
     def save(self):
         with open(self.location, 'w') as sessionFile:
-            sessionFile.write(pickle.dumps(self))
+            sessionFile.write(str(pickle.dumps(self)))

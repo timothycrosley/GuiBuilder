@@ -27,22 +27,22 @@ import inspect
 import os
 import sys
 import types
-from glob import glob
 import WebElements.All as WebElements
+from glob import glob
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtWebKit import *
 from subprocess import Popen
 from WebElements import shpaml, UITemplate
+from WebElements.Base import TextNode
 from WebElements.DictUtils import OrderedDict
 from WebElements.MultiplePythonSupport import *
-from WebElements.Base import TextNode
 
-import GuiBuilderConfig
-from GuiBuilderConfig import indent
-from GuiBuilderView import Ui_MainWindow
+from . import GuiBuilderConfig
+from .GuiBuilderConfig import indent
+from .GuiBuilderView import Ui_MainWindow
+from .Session import Session
 from itertools import chain
-from Session import Session
 
 sharedFilesRoot = GuiBuilderConfig.sharedFilesRoot
 LAUNCH_DIRECTORY = os.getcwd()
