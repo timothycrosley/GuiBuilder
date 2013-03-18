@@ -40,15 +40,9 @@ class Session(dict):
 
     def load(self):
         self.clear()
-        with open(self.location, 'r') as sessionFile:
-            try:
-                if sys.version >= "3":
-                    self.update(pickle.loads(bytes(sessionFile.read(), 'utf8')))
-                else:
-                    self.update(pickle.loads(sessionFile.read()))
-            except Exception:
-                pass
+        with open(self.location, 'rb') as sessionFile:
+            self.update(pickle.loads(sessionFile.read()))
 
     def save(self):
-        with open(self.location, 'w') as sessionFile:
-            sessionFile.write(str(pickle.dumps(self)))
+        with open(self.location, 'wb') as sessionFile:
+            sessionFile.write(pickle.dumps(self))
