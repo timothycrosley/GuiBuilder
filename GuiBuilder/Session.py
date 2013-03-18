@@ -40,8 +40,11 @@ class Session(dict):
 
     def load(self):
         self.clear()
-        with open(self.location, 'rb') as sessionFile:
-            self.update(pickle.loads(sessionFile.read()))
+        try:
+            with open(self.location, 'rb') as sessionFile:
+                self.update(pickle.loads(sessionFile.read()))
+        except Exception:
+            pass
 
     def save(self):
         with open(self.location, 'wb') as sessionFile:
