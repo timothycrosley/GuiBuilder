@@ -5180,7 +5180,7 @@ RestClient.makeRequest = function(url, method, params, callbackFunction)
     if(!xmlhttp) return false;
     if(!method) method = "POST";
 
-    if(method=="GET")
+    if(method == "GET" || method == "DELETE")
     {
         xmlhttp.open(method, url + "?" + params, true);
         params = null;
