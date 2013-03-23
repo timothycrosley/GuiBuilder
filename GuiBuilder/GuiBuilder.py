@@ -571,10 +571,10 @@ class GuiBuilder(QMainWindow):
     def saveAs(self):
         fileName = QFileDialog.getSaveFileName(self, "Save to WUI(WebElement User Interface) file",
                                             self.getLastOpenedDirectory(), "Files (*.wui);;All Files (*)")
+        fileName = fileName[0]
         if not fileName:
             return
 
-        fileName = fileName[0]
         if not ".wui" in fileName:
             fileName = fileName + ".wui"
 
