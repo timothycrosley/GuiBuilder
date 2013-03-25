@@ -157,6 +157,7 @@ class GuiBuilder(QMainWindow):
         self.selectedKey = None
         self.propertyControls = {}
         self.lastSaved = ""
+        self.scrollPosition = QPoint(0, 0)
 
         self.connect(self.ui.newTemplate, SIGNAL('clicked()'), self.newTemplate)
         self.connect(self.ui.backToStartPage, SIGNAL('clicked()'), self.backToStartPage)
@@ -185,6 +186,7 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.recentlyOpened, SIGNAL("currentIndexChanged(const QString &)"), self.openRecent)
         self.connect(self.ui.preview, SIGNAL("titleChanged(const QString &)"), self.selectElement)
         self.connect(self.ui.documentation, SIGNAL("clicked()"), self.startDocBrowser)
+        self.connect(self.ui.preview.page().mainFrame(), SIGNAL("initialLayoutCompleted()"), self.updateScroll)
 
         def treeDropEvent(event):
             to_return = QTreeWidget.dropEvent(self.ui.tree, event)
@@ -607,7 +609,7 @@ class GuiBuilder(QMainWindow):
         self.oldTemplate = None
         self.updatePreview(False)
 
-    def highlightSelected(self, uiStructure, index=0, inTab=None, inStack=None, setStack=False):
+    def highlightSelected(self, uiStructure, index=0, inTabs=None, inStack=None, setStack=False):
         setStackNextLoop = False
         for nestedIndex, element in enumerate((element for element in uiStructure.childElements or ()
                                               if type(element) not in (str, unicode))):
@@ -622,7 +624,9 @@ class GuiBuilder(QMainWindow):
                 properties.setdefault('label.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
                                                                              (index, properties.get('onclick', '')))
             elif elementType in ('tab', 'containers-tab'):
-                inTab = element
+                if inTabs == None:
+                    inTabs = []
+                inTabs.append(element)
                 properties.setdefault('tabLabel.javascriptEvents', {})['onclick'] = ("document.title = '%s';%s" %
                                                                              (index, properties.get('onclick', '')))
             elif elementType in ('stack', 'layout-stack'):
@@ -635,15 +639,14 @@ class GuiBuilder(QMainWindow):
                 if 'field' in elementType:
                     properties['labelStyle'] = "border:2px blue dashed;" + properties.get('labelStyle', '')
 
-                if elementType in ('tab', 'containers-tab'):
-                    properties['select'] = True
-                elif inTab:
-                    inTab.properties['select'] = True
-                elif inStack and inStack[1]:
+                if inTabs:
+                    for inTab in inTabs:
+                        inTab.properties['select'] = True
+                if inStack and inStack[1]:
                     inStack[0].properties['index'] = inStack[1]
                 properties['style'] = "border:2px blue dashed;" + properties.get('style', '')
             index += 1
-            index = self.highlightSelected(element, index, inTab, inStack, setStackNextLoop)
+            index = self.highlightSelected(element, index, inTabs, inStack, setStackNextLoop)
         return index
 
     def updatePreview(self, redrawTree=True):
@@ -665,7 +668,13 @@ class GuiBuilder(QMainWindow):
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
+
+
+            scrollPosition = self.ui.preview.page().mainFrame().scrollPosition()
+            if scrollPosition:
+                self.scrollPosition = QPoint(scrollPosition.x(), scrollPosition.y())
             self.ui.preview.setHtml(self.html(element.toHTML()), QUrl.fromLocalFile(sharedFilesRoot + "/"))
+
             if redrawTree:
                 self.updateTree()
                 self.disconnect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
@@ -673,6 +682,9 @@ class GuiBuilder(QMainWindow):
                 self.connect(self.ui.wuiSHPAML, SIGNAL("textChanged()"), self.updateXML)
 
         self.updateSaveIndicator()
+
+    def updateScroll(self):
+        self.ui.preview.page().mainFrame().setScrollPosition(self.scrollPosition)
 
     def updateProperties(self, item, ignored):
         if not item or item.text(4) == self.selectedKey:
