@@ -46,7 +46,7 @@ from itertools import chain
 
 sharedFilesRoot = GuiBuilderConfig.sharedFilesRoot
 LAUNCH_DIRECTORY = os.getcwd()
-
+app = None
 
 class TextEditDialog(QDialog):
 
@@ -150,7 +150,8 @@ class GuiBuilder(QMainWindow):
         self.setWindowIcon(QIcon('icons/icon.png'))
         self.setCurrentFile(None)
         self.genericElementIcon = QIcon('icons/elements/generic.png')
-        self.oldTemplate = ""
+        self.oldXML = ""
+        self.oldSHPAML = ""
         self.populateElements()
         self.propertyMap = {}
         self.currentElementKey = 0
@@ -166,12 +167,6 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.open, SIGNAL("clicked()"), self.open)
         self.connect(self.ui.save, SIGNAL("clicked()"), self.save)
         self.connect(self.ui.saveAs, SIGNAL("clicked()"), self.saveAs)
-        self.connect(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
-                     self.updateDocumentation)
-        self.connect(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
-                     self.updateProperties)
-        self.connect(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
-                     self.refreshPreviewKeepTree)
         self.connect(self.ui.expand, SIGNAL("clicked()"), self.ui.tree.expandAll)
         self.connect(self.ui.collapse, SIGNAL("clicked()"), self.ui.tree.collapseAll)
         self.connect(self.ui.reload, SIGNAL("clicked()"), self.reloadEverything)
@@ -187,6 +182,7 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.preview, SIGNAL("titleChanged(const QString &)"), self.selectElement)
         self.connect(self.ui.documentation, SIGNAL("clicked()"), self.startDocBrowser)
         self.connect(self.ui.preview.page().mainFrame(), SIGNAL("initialLayoutCompleted()"), self.updateScroll)
+        self._selectCurrentTreeItem(self.connect)
 
         def treeDropEvent(event):
             to_return = QTreeWidget.dropEvent(self.ui.tree, event)
@@ -227,6 +223,15 @@ class GuiBuilder(QMainWindow):
         self.ui.cancelFilter.hide()
         self.ui.cancelPropertyFilter.hide()
         self.ui.cancelTreeFilter.hide()
+
+    def _selectCurrentTreeItem(self, action):
+        action(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
+                     self.updateDocumentation)
+        action(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
+                     self.updateProperties)
+        action(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
+                     self.refreshPreviewKeepTree)
+
 
     def resizeTreeColumns(self):
         for column in xrange(4):
@@ -414,7 +419,9 @@ class GuiBuilder(QMainWindow):
 
     def gotoEditPage(self):
         self.ui.pages.setCurrentIndex(1)
-        self.ui.cancelFilter.hide()
+        self.ui.cancelFilter.click()
+        self.ui.cancelTreeFilter.click()
+        self.ui.cancelPropertyFilter.click()
         self.ui.filter.setFocus()
         self.ui.continueEditing.show()
 
@@ -437,6 +444,7 @@ class GuiBuilder(QMainWindow):
         return returnValue
 
     def updateTree(self):
+        self._selectCurrentTreeItem(self.disconnect)
         self.propertyMap = {}
         self.currentElementKey = 0
         self.ui.tree.clear()
@@ -456,7 +464,9 @@ class GuiBuilder(QMainWindow):
         if self.ui.tree.currentIndex():
             self.ui.tree.scrollTo(self.ui.tree.currentIndex())
 
+        self._selectCurrentTreeItem(self.connect)
         self.updateSaveIndicator()
+
 
     def updateSaveIndicator(self):
         if self.currentFile and self.lastSaved != self.ui.wuiSHPAML.toPlainText():
@@ -502,9 +512,17 @@ class GuiBuilder(QMainWindow):
             return self.genericElementIcon
 
     def newTemplate(self):
+        if self.unsavedChanges():
+            reply = QMessageBox.warning(self, 'Abandon Changes?',
+                                        "You have unsaved changes, are you sure you want to create a new template?",
+                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No:
+                return
+
         sharedFilesRoot = autoFindStatic(LAUNCH_DIRECTORY)
         self.setCurrentFile(None)
         self.ui.wuiXML.setText('<flow>\n</flow>')
+        self.unselectCurrentElement()
         self.gotoEditPage()
 
     def backToStartPage(self):
@@ -513,6 +531,14 @@ class GuiBuilder(QMainWindow):
     def openRecent(self, fileName):
         fileName = str(fileName)
         if fileName and fileName != "Open Recent...":
+            if self.unsavedChanges():
+                reply = QMessageBox.warning(self, 'Abandon Changes?',
+                                    "You have unsaved changes, are you sure you want to open a different template?",
+                                    QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                if reply == QMessageBox.No:
+                    self.ui.recentlyOpened.setCurrentIndex(0)
+                    return
+
             self.setFile(fileName)
 
     def getLastOpenedDirectory(self):
@@ -523,11 +549,34 @@ class GuiBuilder(QMainWindow):
 
         return openAt
 
+    def unsavedChanges(self):
+        template = self.ui.wuiSHPAML.toPlainText()
+        return (self.currentFile and self.ui.save.isEnabled()) or \
+               (not self.currentFile and template and not template.strip().startswith(">"))
+
     def open(self):
+        if self.unsavedChanges():
+            reply = QMessageBox.warning(self, 'Abandon Changes?',
+                                        "You have unsaved changes, are you sure you want to open a different file?",
+                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No:
+                return
+
         fileName = QFileDialog.getOpenFileName(self, "Open WUI(WebElement User Interface) file",
                                                self.getLastOpenedDirectory(), "Files (*.wui);;All Files (*)");
         if fileName and fileName[0]:
             self.setFile(fileName[0])
+
+    def closeEvent(self, event):
+        if self.unsavedChanges():
+            reply = QMessageBox.warning(self, 'Abandon Changes?',
+                                            "You have unsaved changes, are you sure you want quit?",
+                                            QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.No:
+                return event.ignore()
+
+        return event.accept()
+
 
     def updateRecent(self, fileName):
         self.session['lastOpenedDirectory'] = os.path.dirname(str(fileName))
@@ -554,7 +603,9 @@ class GuiBuilder(QMainWindow):
         self.lastSaved = template
         self.setCurrentFile(fileName)
 
+        self.unselectCurrentElement()
         self.gotoEditPage()
+        self.updateSaveIndicator()
 
     def save(self):
         if not self.currentFile:
@@ -602,11 +653,11 @@ class GuiBuilder(QMainWindow):
         self.refreshPreview()
 
     def refreshPreview(self):
-        self.oldTemplate = None
+        self.oldXML = None
         self.updatePreview()
 
     def refreshPreviewKeepTree(self):
-        self.oldTemplate = None
+        self.oldXML = None
         self.updatePreview(False)
 
     def highlightSelected(self, uiStructure, index=0, inTabs=None, inStack=None, setStack=False):
@@ -650,22 +701,33 @@ class GuiBuilder(QMainWindow):
         return index
 
     def updatePreview(self, redrawTree=True):
-        if not self.ui.wuiXML.toPlainText() or self.ui.wuiXML.toPlainText() == self.oldTemplate:
+        if not self.ui.wuiXML.toPlainText() or self.ui.wuiXML.toPlainText() == self.oldXML:
             return
 
-        self.oldTemplate = self.ui.wuiXML.toPlainText()
+        selected = app.focusWidget()
         try:
             self.structure = UITemplate.fromXML(unicode(self.ui.wuiXML.toPlainText()))
-            validTemplate = True
-        except Exception:
-            validTemplate = False
-            print("There was an error converting the template to structure")
-
-        if validTemplate:
             structureCopy = copy.deepcopy(self.structure)
             self.highlightSelected(structureCopy)
             element = GuiBuilderConfig.Factory.buildFromTemplate(structureCopy)
             scriptContainer = GuiBuilderConfig.Factory.build('ScriptContainer')
+            validTemplate = True
+        except Exception as e:
+            validTemplate = False
+            self.ui.wuiXML.setText(self.oldXML)
+            self.ui.wuiSHPAML.setText(self.oldSHPAML)
+            self.ui.splitter.setStyleSheet("#splitter{background-color:#ffc0c0;}")
+            if selected:
+                selected.setStyleSheet("background-color: #ffc0c0;");
+            print("Exception thrown trying to render template: " + str(e))
+
+        if validTemplate:
+            if redrawTree:
+                self.ui.splitter.setStyleSheet("#splitter{background-color:rgb(204, 204, 204);}")
+                if selected:
+                    selected.setStyleSheet("");
+            self.oldXML = self.ui.wuiXML.toPlainText()
+            self.oldSHPAML = self.ui.wuiSHPAML.toPlainText()
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
 
@@ -822,6 +884,7 @@ def run():
         openFile = os.path.abspath(sys.argv[1])
 
     global sharedFilesRoot
+    global app
     sharedFilesRoot = autoFindStatic(LAUNCH_DIRECTORY)
     os.chdir(os.path.dirname(__file__) or ".")
     app = QApplication(sys.argv)
