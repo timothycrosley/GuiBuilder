@@ -29,9 +29,22 @@ import sys
 import types
 import WebElements.All as WebElements
 from glob import glob
-from PySide.QtCore import *
-from PySide.QtGui import *
-from PySide.QtWebKit import *
+
+try:
+    from PySide.QtCore import *
+    from PySide.QtGui import *
+    from PySide.QtWebKit import *
+    from .GuiBuilderView import Ui_MainWindow
+    USING_PYQT = False
+    USING_PYSIDE = True
+except ImportError:
+    from PyQt4.QtCore import *
+    from PyQt4.QtGui import *
+    from PyQt4.QtWebKit import *
+    from .GuiBuilderViewPyQt import Ui_MainWindow
+    USING_PYQT = True
+    USING_PYSIDE = False
+
 from subprocess import Popen
 from WebElements import shpaml, UITemplate
 from WebElements.Base import TextNode
@@ -40,7 +53,6 @@ from WebElements.MultiplePythonSupport import *
 
 from . import GuiBuilderConfig
 from .GuiBuilderConfig import indent
-from .GuiBuilderView import Ui_MainWindow
 from .Session import Session
 from itertools import chain
 
@@ -74,7 +86,7 @@ class TextEditDialog(QDialog):
         dialog = cls(parentDisplay, currentText)
         if not dialog.exec_() == QDialog.Accepted:
             return dialog.oldText
-        return dialog.edit.toPlainText().replace("\n", "<br/>")
+        return unicode(dialog.edit.toPlainText()).replace("\n", "<br/>")
 
 
 class PropertyController(QObject):
@@ -291,13 +303,14 @@ class GuiBuilder(QMainWindow):
             for row in xrange(self.ui.properties.rowCount()):
                 self.ui.properties.setRowHidden(row, False)
         else:
+            text = unicode(text)
             for row in xrange(self.ui.properties.rowCount()):
                 self.ui.cancelPropertyFilter.show()
                 self.ui.properties.setRowHidden(row, True)
                 for col in xrange(self.ui.properties.columnCount()):
                     item = self.ui.properties.cellWidget(row, col)
                     if item:
-                        if text.lower() in item.text().lower():
+                        if text.lower() in unicode(item.text()).lower():
                             self.ui.properties.setRowHidden(row, False)
 
         self.resetPropertyLayout()
@@ -311,13 +324,14 @@ class GuiBuilder(QMainWindow):
                 iterator += 1
                 item.setHidden(False)
         else:
+            text = unicode(text)
             iterator = QTreeWidgetItemIterator(self.ui.tree)
             while iterator.value():
                 item = iterator.value()
                 iterator += 1
                 item.setHidden(True)
                 for column in xrange(5):
-                    if text.lower() in item.text(column).lower():
+                    if text.lower() in unicode(item.text(column)).lower():
                         item.setHidden(False)
                         parent = item.parent()
                         while parent:
@@ -356,7 +370,7 @@ class GuiBuilder(QMainWindow):
         self.ui.info.setText("")
 
     def updateXML(self):
-        self.ui.wuiXML.setText(shpaml.convert_text(self.ui.wuiSHPAML.toPlainText()))
+        self.ui.wuiXML.setText(shpaml.convert_text(unicode(self.ui.wuiSHPAML.toPlainText())))
         self.updateSaveIndicator()
 
     def convertTreeToTemplate(self):
@@ -367,7 +381,7 @@ class GuiBuilder(QMainWindow):
             template.append(str(self.__templateFromTreeNode(self.ui.tree.topLevelItem(topLevelItemIndex))))
 
         template = ''.join(template)
-        existing = self.ui.wuiSHPAML.toPlainText().strip()
+        existing = unicode(self.ui.wuiSHPAML.toPlainText()).strip()
         new = template.strip()
         if existing != new:
             position = self.ui.wuiSHPAML.textCursor().position()
@@ -469,7 +483,7 @@ class GuiBuilder(QMainWindow):
 
 
     def updateSaveIndicator(self):
-        if self.currentFile and self.lastSaved != self.ui.wuiSHPAML.toPlainText():
+        if self.currentFile and self.lastSaved != unicode(self.ui.wuiSHPAML.toPlainText()):
             self.ui.save.setEnabled(True)
         else:
             self.ui.save.setEnabled(False)
@@ -550,7 +564,7 @@ class GuiBuilder(QMainWindow):
         return openAt
 
     def unsavedChanges(self):
-        template = self.ui.wuiSHPAML.toPlainText()
+        template = unicode(self.ui.wuiSHPAML.toPlainText())
         return (self.currentFile and self.ui.save.isEnabled()) or \
                (not self.currentFile and template and not template.strip().startswith(">"))
 
@@ -564,8 +578,12 @@ class GuiBuilder(QMainWindow):
 
         fileName = QFileDialog.getOpenFileName(self, "Open WUI(WebElement User Interface) file",
                                                self.getLastOpenedDirectory(), "Files (*.wui);;All Files (*)");
-        if fileName and fileName[0]:
-            self.setFile(fileName[0])
+
+        if USING_PYSIDE:
+            fileName = fileName and fileName[0] or ""
+
+        if fileName:
+            self.setFile(fileName)
 
     def closeEvent(self, event):
         if self.unsavedChanges():
@@ -611,7 +629,7 @@ class GuiBuilder(QMainWindow):
         if not self.currentFile:
             self.saveAs()
 
-        template = self.ui.wuiSHPAML.toPlainText()
+        template = unicode(self.ui.wuiSHPAML.toPlainText())
         with open(self.currentFile, 'w') as wuiFile:
             wuiFile.write(template)
 
@@ -624,7 +642,9 @@ class GuiBuilder(QMainWindow):
     def saveAs(self):
         fileName = QFileDialog.getSaveFileName(self, "Save to WUI(WebElement User Interface) file",
                                             self.getLastOpenedDirectory(), "Files (*.wui);;All Files (*)")
-        fileName = fileName[0]
+        if USING_PYSIDE:
+            fileName = fileName and fileName[0] or ""
+
         if not fileName:
             return
 
@@ -701,7 +721,7 @@ class GuiBuilder(QMainWindow):
         return index
 
     def updatePreview(self, redrawTree=True):
-        if not self.ui.wuiXML.toPlainText() or self.ui.wuiXML.toPlainText() == self.oldXML:
+        if not unicode(self.ui.wuiXML.toPlainText()) or unicode(self.ui.wuiXML.toPlainText()) == self.oldXML:
             return
 
         selected = app.focusWidget()
@@ -726,8 +746,8 @@ class GuiBuilder(QMainWindow):
                 self.ui.splitter.setStyleSheet("#splitter{background-color:rgb(204, 204, 204);}")
                 if selected:
                     selected.setStyleSheet("");
-            self.oldXML = self.ui.wuiXML.toPlainText()
-            self.oldSHPAML = self.ui.wuiSHPAML.toPlainText()
+            self.oldXML = unicode(self.ui.wuiXML.toPlainText())
+            self.oldSHPAML = unicode(self.ui.wuiSHPAML.toPlainText())
             element.setScriptContainer(scriptContainer)
             element.addChildElement(scriptContainer)
 

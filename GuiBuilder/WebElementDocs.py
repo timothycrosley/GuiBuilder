@@ -29,13 +29,25 @@ import sys
 import types
 from subprocess import Popen
 
-from PySide.QtCore import *
-from PySide.QtGui import *
-from PySide.QtWebKit import *
+try:
+    from PySide.QtCore import *
+    from PySide.QtGui import *
+    from PySide.QtWebKit import *
+    from .WebElementDocsView import Ui_MainWindow
+    USING_PYQT = False
+    USING_PYSIDE = True
+except ImportError:
+    from PyQt4.QtCore import *
+    from PyQt4.QtGui import *
+    from PyQt4.QtWebKit import *
+    from .WebElementDocsViewPyQt import Ui_MainWindow
+    USING_PYQT = True
+    USING_PYSIDE = False
+
 from WebElements.MultiplePythonSupport import *
 
 from . import GuiBuilderConfig
-from .WebElementDocsView import Ui_MainWindow
+
 
 class WebElementDocs(QMainWindow):
 
