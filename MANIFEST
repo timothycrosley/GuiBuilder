@@ -4,9 +4,11 @@ GuiBuilder/GuiBuilder.css
 GuiBuilder/GuiBuilder.py
 GuiBuilder/GuiBuilderConfig.py
 GuiBuilder/GuiBuilderView.py
+GuiBuilder/GuiBuilderViewPyQt.py
 GuiBuilder/Session.py
 GuiBuilder/WebElementDocs.py
 GuiBuilder/WebElementDocsView.py
+GuiBuilder/WebElementDocsViewPyQt.py
 GuiBuilder/__init__.py
 GuiBuilder/icons/app.png
 GuiBuilder/icons/back.png

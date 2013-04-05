@@ -110,6 +110,10 @@ class PropertyController(QObject):
             self.extendedEdit.setMaximumWidth(20)
             self.extendedEdit.setMinimumWidth(20)
 
+            self.value = ""
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.applyValue)
+
 
         def createExtendedEdit(self):
             result = QLabel()
@@ -140,10 +144,14 @@ class PropertyController(QObject):
 
             return widget
 
-        def setValue(self, value):
-            self.builder.propertyMap[self.elementKey][self.propertyName] = unicode(value or "")
+        def applyValue(self):
+            self.timer.stop()
+            self.builder.propertyMap[self.elementKey][self.propertyName] = unicode(self.value or "")
             self.builder.convertTreeToTemplate()
 
+        def setValue(self, value):
+            self.value = value
+            self.timer.start(300)
 
 class GuiBuilder(QMainWindow):
     session = Session(os.path.expanduser('~') + "/.GuiBuilderSession")
@@ -166,6 +174,7 @@ class GuiBuilder(QMainWindow):
         self.oldSHPAML = ""
         self.populateElements()
         self.propertyMap = {}
+        self.collapsedMap = {}
         self.currentElementKey = 0
         self.selectedKey = None
         self.propertyControls = {}
@@ -179,8 +188,8 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.open, SIGNAL("clicked()"), self.open)
         self.connect(self.ui.save, SIGNAL("clicked()"), self.save)
         self.connect(self.ui.saveAs, SIGNAL("clicked()"), self.saveAs)
-        self.connect(self.ui.expand, SIGNAL("clicked()"), self.ui.tree.expandAll)
-        self.connect(self.ui.collapse, SIGNAL("clicked()"), self.ui.tree.collapseAll)
+        self.connect(self.ui.expand, SIGNAL("clicked()"), self.expandAllTreeItems)
+        self.connect(self.ui.collapse, SIGNAL("clicked()"), self.collapseAllTreeItems)
         self.connect(self.ui.reload, SIGNAL("clicked()"), self.reloadEverything)
         self.connect(self.ui.filter, SIGNAL('textChanged(const QString &)'), self.filterItemBrowser)
         self.connect(self.ui.filterProperties, SIGNAL('textChanged(const QString &)'), self.filterProperties)
@@ -194,6 +203,8 @@ class GuiBuilder(QMainWindow):
         self.connect(self.ui.preview, SIGNAL("titleChanged(const QString &)"), self.selectElement)
         self.connect(self.ui.documentation, SIGNAL("clicked()"), self.startDocBrowser)
         self.connect(self.ui.preview.page().mainFrame(), SIGNAL("initialLayoutCompleted()"), self.updateScroll)
+        self.connect(self.ui.tree, SIGNAL("itemExpanded(QTreeWidgetItem*)"), self.treeItemExpanded)
+        self.connect(self.ui.tree, SIGNAL("itemCollapsed(QTreeWidgetItem*)"), self.treeItemCollapsed)
         self._selectCurrentTreeItem(self.connect)
 
         def treeDropEvent(event):
@@ -217,6 +228,13 @@ class GuiBuilder(QMainWindow):
                         self.selectedKey = 0
                     else:
                         self.selectedKey = int(self.ui.tree.topLevelItem(index-1).text(4)) + 1
+                newMap = {}
+                for key, value in iteritems(self.collapsedMap):
+                    if key >= int(self.selectedKey):
+                        newMap[key + 1] = value
+                    else:
+                        newMap[key] = value
+                self.collapsedMap = newMap
             return success
 
         def keyPressOverride(evt):
@@ -235,6 +253,24 @@ class GuiBuilder(QMainWindow):
         self.ui.cancelFilter.hide()
         self.ui.cancelPropertyFilter.hide()
         self.ui.cancelTreeFilter.hide()
+
+    def expandAllTreeItems(self):
+        self.collapsedMap = {}
+        self.ui.tree.expandAll()
+
+    def collapseAllTreeItems(self):
+        self.ui.tree.collapseAll()
+        iterator = QTreeWidgetItemIterator(self.ui.tree)
+        while iterator.value():
+            item = iterator.value()
+            iterator += 1
+            self.collapsedMap[int(item.text(4))] = True
+
+    def treeItemCollapsed(self, treeItem):
+        self.collapsedMap[int(treeItem.text(4))] = True
+
+    def treeItemExpanded(self, treeItem):
+        self.collapsedMap[int(treeItem.text(4))] = False
 
     def _selectCurrentTreeItem(self, action):
         action(self.ui.tree, SIGNAL("currentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)"),
@@ -361,7 +397,13 @@ class GuiBuilder(QMainWindow):
                             self.ui.tree.takeTopLevelItem(topLevelItemIndex)
 
         self.unselectCurrentElement()
+        xScroll = self.ui.tree.horizontalScrollBar().sliderPosition()
+        yScroll = self.ui.tree.verticalScrollBar().sliderPosition()
         self.convertTreeToTemplate()
+        def fixScroll():
+            self.ui.tree.horizontalScrollBar().setSliderPosition(xScroll)
+            self.ui.tree.verticalScrollBar().setSliderPosition(yScroll)
+        QTimer.singleShot(1, fixScroll)
 
     def unselectCurrentElement(self):
         self.selectedKey = None
@@ -473,7 +515,6 @@ class GuiBuilder(QMainWindow):
 
         for childElement in (self.structure and self.structure.childElements or ()):
             self.__convertDictToNode(childElement, self.ui.tree)
-        self.ui.tree.expandAll()
         self.resizeTreeColumns()
         if self.ui.tree.currentIndex():
             self.ui.tree.scrollTo(self.ui.tree.currentIndex())
@@ -503,6 +544,7 @@ class GuiBuilder(QMainWindow):
         newNode.setText(2, structure.name)
         newNode.setText(3, structure.accessor)
         newNode.setText(4, self.newElementKey())
+        newNode.setExpanded(not self.collapsedMap.get(int(newNode.text(4)), False))
         self.resizeTreeColumns()
         if self.selectedKey != None:
             if int(newNode.text(4)) == int(self.selectedKey):
@@ -534,6 +576,7 @@ class GuiBuilder(QMainWindow):
                 return
 
         sharedFilesRoot = autoFindStatic(LAUNCH_DIRECTORY)
+        self.collapsedMap = {}
         self.setCurrentFile(None)
         self.ui.wuiXML.setText('<flow>\n</flow>')
         self.unselectCurrentElement()
@@ -553,6 +596,7 @@ class GuiBuilder(QMainWindow):
                     self.ui.recentlyOpened.setCurrentIndex(0)
                     return
 
+            self.collapsedMap = {}
             self.setFile(fileName)
 
     def getLastOpenedDirectory(self):
@@ -583,6 +627,7 @@ class GuiBuilder(QMainWindow):
             fileName = fileName and fileName[0] or ""
 
         if fileName:
+            self.collapsedMap = {}
             self.setFile(fileName)
 
     def closeEvent(self, event):
