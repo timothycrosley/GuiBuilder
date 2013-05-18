@@ -31,7 +31,6 @@ sharedFilesRoot = os.environ.get("GUI_BUILDER_SHARED_FILES_ROOT",
 onSave = os.environ.get("GUI_BUILDER_ON_SAVE", None)
 indent = " "
 
-WebElements.Fields.Factory.products.pop('field', None)
 sections = ({'Name':'Layout',
              'Factory':WebElements.Layout.Factory,
              'Icon':'icons/sections/layout.png'},
@@ -44,9 +43,6 @@ sections = ({'Name':'Layout',
             {'Name':'Buttons',
              'Factory':WebElements.Buttons.Factory,
              'Icon':'icons/sections/buttons.png'},
-            {'Name':'Fields',
-             'Factory':WebElements.Fields.Factory,
-             'Icon':'icons/sections/fields.png'},
             {'Name':'Inputs',
              'Factory':WebElements.Inputs.Factory,
              'Icon':'icons/sections/inputs.png'},

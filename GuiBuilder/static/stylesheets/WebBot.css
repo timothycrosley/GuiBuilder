@@ -631,31 +631,36 @@ input.WAddFilterButton {
   margin-top: 8px;
 }
 
-/* line 109, ../sass/WebElementStructure.sass */
+/* line 108, ../sass/WebElementStructure.sass */
+.WField {
+  line-height: 28px;
+}
+
+/* line 112, ../sass/WebElementStructure.sass */
 .WFilterHighlight {
   background-color: #dedede;
   border: 1px #bcbbbb solid;
 }
 
-/* line 113, ../sass/WebElementStructure.sass */
+/* line 116, ../sass/WebElementStructure.sass */
 .WCheckboxField {
   margin-bottom: 4px;
   margin-top: 7px;
   clear: both;
 }
 
-/* line 118, ../sass/WebElementStructure.sass */
+/* line 121, ../sass/WebElementStructure.sass */
 .WUndoDelete {
   margin: 3px;
   padding: 3px;
 }
 
-/* line 122, ../sass/WebElementStructure.sass */
+/* line 125, ../sass/WebElementStructure.sass */
 .WStoredValue {
   margin-right: 4px;
 }
 
-/* line 125, ../sass/WebElementStructure.sass */
+/* line 128, ../sass/WebElementStructure.sass */
 .WMenu {
   color: black;
   position: absolute;
@@ -665,50 +670,50 @@ input.WAddFilterButton {
   border: 1px #5a5a5a solid;
 }
 
-/* line 133, ../sass/WebElementStructure.sass */
+/* line 136, ../sass/WebElementStructure.sass */
 .WSpaced {
   margin-left: 0.3em;
   margin-right: 0.3em;
 }
 
-/* line 137, ../sass/WebElementStructure.sass */
+/* line 140, ../sass/WebElementStructure.sass */
 .WAccordion {
   width: 100%;
 }
-/* line 140, ../sass/WebElementStructure.sass */
-.WAccordion .WToggle {
+/* line 143, ../sass/WebElementStructure.sass */
+.WAccordion .WAccordionToggle {
   width: 100%;
   background-color: #ffffbb;
   cursor: pointer;
   cursor: hand;
   border-bottom: 1px solid #cccc88;
 }
-/* line 146, ../sass/WebElementStructure.sass */
-.WAccordion .WToggle img {
+/* line 149, ../sass/WebElementStructure.sass */
+.WAccordion .WAccordionToggle img {
   padding: 4px;
 }
-/* line 148, ../sass/WebElementStructure.sass */
-.WAccordion .WToggle span {
+/* line 151, ../sass/WebElementStructure.sass */
+.WAccordion .WAccordionToggle span {
   margin-left: 3px;
   padding: 3px;
   display: block;
 }
 
-/* line 153, ../sass/WebElementStructure.sass */
+/* line 156, ../sass/WebElementStructure.sass */
 .WVerticalRule {
   border-left: 1px gray solid;
   height: 100%;
   width: 0%;
 }
 
-/* line 158, ../sass/WebElementStructure.sass */
+/* line 161, ../sass/WebElementStructure.sass */
 .WJumpToLetter {
   background-color: #0066cc;
   padding-bottom: 10px;
   padding-top: 10px;
 }
 
-/* line 163, ../sass/WebElementStructure.sass */
+/* line 166, ../sass/WebElementStructure.sass */
 .WLetterSelected {
   font-family: monospace;
   color: black;
@@ -720,7 +725,7 @@ input.WAddFilterButton {
   padding-right: 5px;
 }
 
-/* line 174, ../sass/WebElementStructure.sass */
+/* line 177, ../sass/WebElementStructure.sass */
 .WLetter:link, .WLetter:active, .WLetter:visited {
   font-family: monospace;
   color: #dadada;
@@ -728,7 +733,7 @@ input.WAddFilterButton {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 180, ../sass/WebElementStructure.sass */
+/* line 183, ../sass/WebElementStructure.sass */
 .WLetter:hover {
   font-family: monospace;
   color: white;
@@ -739,7 +744,7 @@ input.WAddFilterButton {
   width: 100%;
 }
 
-/* line 189, ../sass/WebElementStructure.sass */
+/* line 192, ../sass/WebElementStructure.sass */
 div.WCrumb {
   border: 1px #868686 solid;
   color: black;
@@ -748,7 +753,7 @@ div.WCrumb {
   background-repeat: repeat-x;
   padding: 5px;
 }
-/* line 196, ../sass/WebElementStructure.sass */
+/* line 199, ../sass/WebElementStructure.sass */
 div.WCrumb a {
   font-weight: bold;
   cursor: pointer;
@@ -757,59 +762,59 @@ div.WCrumb a {
   cursor: pointer;
   cursor: hand;
 }
-/* line 203, ../sass/WebElementStructure.sass */
+/* line 206, ../sass/WebElementStructure.sass */
 div.WCrumb a:hover {
   color: white;
   background-color: gray;
 }
 
-/* line 207, ../sass/WebElementStructure.sass */
+/* line 210, ../sass/WebElementStructure.sass */
 .WTimeFrame {
   margin-top: 2px;
 }
-/* line 209, ../sass/WebElementStructure.sass */
+/* line 212, ../sass/WebElementStructure.sass */
 .WTimeFrame a {
   cursor: pointer;
   cursor: hand;
 }
-/* line 210, ../sass/WebElementStructure.sass */
+/* line 213, ../sass/WebElementStructure.sass */
 .WTimeFrame a.selected {
   font-weight: bold;
   text-decoration: none;
 }
-/* line 216, ../sass/WebElementStructure.sass */
+/* line 219, ../sass/WebElementStructure.sass */
 .WTimeFrame .WLabel {
   margin-left: 5px;
 }
 
-/* line 219, ../sass/WebElementStructure.sass */
+/* line 222, ../sass/WebElementStructure.sass */
 .WBlock {
   display: block;
 }
 
-/* line 222, ../sass/WebElementStructure.sass */
+/* line 225, ../sass/WebElementStructure.sass */
 .WLeft {
   float: left;
 }
 
-/* line 225, ../sass/WebElementStructure.sass */
+/* line 228, ../sass/WebElementStructure.sass */
 .WRight {
   float: right;
 }
 
-/* line 228, ../sass/WebElementStructure.sass */
+/* line 231, ../sass/WebElementStructure.sass */
 .WLabeledData {
   color: #775544;
 }
 
-/* line 231, ../sass/WebElementStructure.sass */
+/* line 234, ../sass/WebElementStructure.sass */
 .WDataLabeled {
   margin-left: 5px;
   color: #773300;
   font-weight: bold;
 }
 
-/* line 236, ../sass/WebElementStructure.sass */
+/* line 239, ../sass/WebElementStructure.sass */
 .WActionBox {
   background-color: #e7e7e7;
   border: 1px solid #cccccc;
@@ -819,23 +824,23 @@ div.WCrumb a:hover {
   width: 130px;
 }
 
-/* line 244, ../sass/WebElementStructure.sass */
+/* line 247, ../sass/WebElementStructure.sass */
 .WActionBoxHeader {
   font-size: 14px;
 }
 
-/* line 247, ../sass/WebElementStructure.sass */
+/* line 250, ../sass/WebElementStructure.sass */
 .WActionBox ul {
   margin: 0;
   color: #cccccc;
   padding-left: 1.5em !important;
 }
-/* line 251, ../sass/WebElementStructure.sass */
+/* line 254, ../sass/WebElementStructure.sass */
 .WActionBox ul li {
   margin: 0;
 }
 
-/* line 254, ../sass/WebElementStructure.sass */
+/* line 257, ../sass/WebElementStructure.sass */
 .WUnrolledSelect {
   margin: 0;
   padding: 0 !important;
@@ -844,14 +849,14 @@ div.WCrumb a:hover {
   list-position: 0;
   width: 75px;
 }
-/* line 261, ../sass/WebElementStructure.sass */
+/* line 264, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li {
   list-style: none;
   display: inline;
   margin: 0;
   padding: 0;
 }
-/* line 266, ../sass/WebElementStructure.sass */
+/* line 269, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li a {
   text-decoration: none;
   display: block;
@@ -861,26 +866,26 @@ div.WCrumb a:hover {
   border: 1px solid #d0d0d0;
   border-width: 0 1px 0 1px;
 }
-/* line 274, ../sass/WebElementStructure.sass */
+/* line 277, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li a:hover {
   background: url("tail_li_hover.gif") 5px 0 no-repeat #6699cc;
   color: #333333;
   border-right: 1px solid #ffffbb;
 }
-/* line 278, ../sass/WebElementStructure.sass */
+/* line 281, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li a.selected {
   background: url("tail_li_selected.gif") 5px 0 no-repeat #6699cc;
   color: black;
   border-right: 1px solid #eef0f4;
 }
-/* line 283, ../sass/WebElementStructure.sass */
+/* line 286, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li span.first {
   display: block;
   background-color: transparent;
   background-image: url("tail_li_first.gif");
   height: 14px;
 }
-/* line 288, ../sass/WebElementStructure.sass */
+/* line 291, ../sass/WebElementStructure.sass */
 .WUnrolledSelect li span.last {
   display: block;
   background-color: transparent;
@@ -888,24 +893,24 @@ div.WCrumb a:hover {
   height: 14px;
 }
 
-/* line 294, ../sass/WebElementStructure.sass */
+/* line 297, ../sass/WebElementStructure.sass */
 div.WCenter {
   overflow: hidden;
   position: relative;
 }
-/* line 297, ../sass/WebElementStructure.sass */
+/* line 300, ../sass/WebElementStructure.sass */
 div.WCenter div.WOuter {
   float: left;
   position: relative;
   left: 50%;
 }
-/* line 301, ../sass/WebElementStructure.sass */
+/* line 304, ../sass/WebElementStructure.sass */
 div.WCenter div.WOuter div.WInner {
   position: relative;
   left: -50%;
 }
 
-/* line 306, ../sass/WebElementStructure.sass */
+/* line 308, ../sass/WebElementStructure.sass */
 .WLoading {
   -webkit-box-shadow: #b3b3b3 1px 1px 1px 1px;
   -moz-box-shadow: #b3b3b3 1px 1px 1px 1px;
@@ -913,24 +918,24 @@ div.WCenter div.WOuter div.WInner {
   background-color: lightgrey;
   border: 1px gray solid;
 }
-/* line 310, ../sass/WebElementStructure.sass */
+/* line 312, ../sass/WebElementStructure.sass */
 .WLoading label {
   line-height: 30px;
   margin-left: 10px;
 }
-/* line 313, ../sass/WebElementStructure.sass */
+/* line 315, ../sass/WebElementStructure.sass */
 .WLoading .WContent {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-/* line 317, ../sass/WebElementStructure.sass */
+/* line 319, ../sass/WebElementStructure.sass */
 .WTabLabels {
   background-color: #434343;
   padding-top: 10px;
   padding-left: 10px;
 }
-/* line 321, ../sass/WebElementStructure.sass */
+/* line 323, ../sass/WebElementStructure.sass */
 .WTabLabels .WTabLabel {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -943,7 +948,7 @@ div.WCenter div.WOuter div.WInner {
   border-right: 1px gray solid;
   padding: 5px;
 }
-/* line 328, ../sass/WebElementStructure.sass */
+/* line 330, ../sass/WebElementStructure.sass */
 .WTabLabels .WTabLabel.WUnselected {
   cursor: pointer;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #cccccc), color-stop(100%, #aaaaaa));
@@ -953,7 +958,7 @@ div.WCenter div.WOuter div.WInner {
   background-image: linear-gradient(#ffffff, #cccccc, #aaaaaa);
   border-top: 1px black solid;
 }
-/* line 332, ../sass/WebElementStructure.sass */
+/* line 334, ../sass/WebElementStructure.sass */
 .WTabLabels .WTabLabel.WUnselected:hover {
   border-top: 1px #396eff solid;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #999999), color-stop(100%, #777777));
@@ -962,7 +967,7 @@ div.WCenter div.WOuter div.WInner {
   background-image: -o-linear-gradient(#ffffff, #999999, #777777);
   background-image: linear-gradient(#ffffff, #999999, #777777);
 }
-/* line 336, ../sass/WebElementStructure.sass */
+/* line 338, ../sass/WebElementStructure.sass */
 .WTabLabels .WTabLabel.WSelected {
   cursor: default;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aaaaaa), color-stop(50%, #cccccc), color-stop(100%, #ffffff));
@@ -973,17 +978,17 @@ div.WCenter div.WOuter div.WInner {
   border-top: 1px white solid;
 }
 
-/* line 341, ../sass/WebElementStructure.sass */
+/* line 343, ../sass/WebElementStructure.sass */
 .WTabContents.WLeft {
   width: 85%;
 }
 
-/* line 343, ../sass/WebElementStructure.sass */
+/* line 345, ../sass/WebElementStructure.sass */
 .WTabLabels.WLeft {
   padding-bottom: 10px;
   width: 15%;
 }
-/* line 346, ../sass/WebElementStructure.sass */
+/* line 348, ../sass/WebElementStructure.sass */
 .WTabLabels.WLeft .WTabLabel {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -1001,7 +1006,7 @@ div.WCenter div.WOuter div.WInner {
   border-left: none;
   padding: 5px;
 }
-/* line 356, ../sass/WebElementStructure.sass */
+/* line 358, ../sass/WebElementStructure.sass */
 .WTabLabels.WLeft .WTabLabel.WUnselected {
   cursor: pointer;
   background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff), color-stop(50%, #cccccc), color-stop(100%, #aaaaaa));
@@ -1011,7 +1016,7 @@ div.WCenter div.WOuter div.WInner {
   background-image: linear-gradient(left, #ffffff, #cccccc, #aaaaaa);
   border-top: 1px black solid;
 }
-/* line 360, ../sass/WebElementStructure.sass */
+/* line 362, ../sass/WebElementStructure.sass */
 .WTabLabels.WLeft .WTabLabel.WUnselected:hover {
   border-top: 1px #396eff solid;
   background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff), color-stop(50%, #999999), color-stop(100%, #777777));
@@ -1020,7 +1025,7 @@ div.WCenter div.WOuter div.WInner {
   background-image: -o-linear-gradient(left, #ffffff, #999999, #777777);
   background-image: linear-gradient(left, #ffffff, #999999, #777777);
 }
-/* line 364, ../sass/WebElementStructure.sass */
+/* line 366, ../sass/WebElementStructure.sass */
 .WTabLabels.WLeft .WTabLabel.WSelected {
   cursor: default;
   background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #aaaaaa), color-stop(50%, #cccccc), color-stop(100%, #ffffff));
@@ -1031,7 +1036,7 @@ div.WCenter div.WOuter div.WInner {
   border-top: 1px white solid;
 }
 
-/* line 370, ../sass/WebElementStructure.sass */
+/* line 372, ../sass/WebElementStructure.sass */
 .WDropArea {
   -webkit-box-shadow: #b3b3b3 1px 1px 1px 1px;
   -moz-box-shadow: #b3b3b3 1px 1px 1px 1px;
@@ -1047,7 +1052,7 @@ div.WCenter div.WOuter div.WInner {
   padding-left: 20px;
   border: 1px gray solid;
 }
-/* line 380, ../sass/WebElementStructure.sass */
+/* line 382, ../sass/WebElementStructure.sass */
 .WDropArea.WEmpty {
   height: 380px;
   width: 400px;
@@ -1057,7 +1062,7 @@ div.WCenter div.WOuter div.WInner {
   padding: 0px;
   padding-bottom: 20px;
 }
-/* line 388, ../sass/WebElementStructure.sass */
+/* line 390, ../sass/WebElementStructure.sass */
 .WDropArea .WStatusBar {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -1068,34 +1073,34 @@ div.WCenter div.WOuter div.WInner {
   border-bottom: 1px gray solid;
   line-height: 32px;
 }
-/* line 393, ../sass/WebElementStructure.sass */
+/* line 395, ../sass/WebElementStructure.sass */
 .WDropArea .WStatusBar .WDropIndicator {
   margin-left: 30px;
   margin-right: 15px;
 }
-/* line 397, ../sass/WebElementStructure.sass */
+/* line 399, ../sass/WebElementStructure.sass */
 .WDropArea .WFile {
   width: 130px;
   height: 140px;
   padding: 5px;
 }
-/* line 401, ../sass/WebElementStructure.sass */
+/* line 403, ../sass/WebElementStructure.sass */
 .WDropArea .WFile .WImageContainer {
   width: 128px;
   height: 128px;
 }
-/* line 404, ../sass/WebElementStructure.sass */
+/* line 406, ../sass/WebElementStructure.sass */
 .WDropArea .WFile .WImageContainer img {
   max-width: 128px;
   max-height: 128px;
 }
-/* line 407, ../sass/WebElementStructure.sass */
+/* line 409, ../sass/WebElementStructure.sass */
 .WDropArea .WFile span {
   text-align: center;
   overflow: hidden;
 }
 
-/* line 418, ../sass/WebElementStructure.sass */
+/* line 420, ../sass/WebElementStructure.sass */
 label.WError {
   background-color: #ffbaba;
   -webkit-border-radius: 0px 0px 10px 10px;
@@ -1104,10 +1109,10 @@ label.WError {
   -o-border-radius: 0px 0px 10px 10px;
   border-radius: 0px 0px 10px 10px;
   border: 1px #ba0000 solid;
-  padding: 4px;
+  padding: 2px;
   width: 100%;
 }
-/* line 420, ../sass/WebElementStructure.sass */
+/* line 422, ../sass/WebElementStructure.sass */
 label.WSuccess {
   background-color: #82db7e;
   -webkit-border-radius: 0px 0px 10px 10px;
@@ -1116,10 +1121,10 @@ label.WSuccess {
   -o-border-radius: 0px 0px 10px 10px;
   border-radius: 0px 0px 10px 10px;
   border: 1px #164614 solid;
-  padding: 4px;
+  padding: 2px;
   width: 100%;
 }
-/* line 422, ../sass/WebElementStructure.sass */
+/* line 424, ../sass/WebElementStructure.sass */
 label.WWarning {
   background-color: #e7f2bc;
   -webkit-border-radius: 0px 0px 10px 10px;
@@ -1128,10 +1133,10 @@ label.WWarning {
   -o-border-radius: 0px 0px 10px 10px;
   border-radius: 0px 0px 10px 10px;
   border: 1px #7b931c solid;
-  padding: 4px;
+  padding: 2px;
   width: 100%;
 }
-/* line 424, ../sass/WebElementStructure.sass */
+/* line 426, ../sass/WebElementStructure.sass */
 label.WInfo {
   background-color: #aed0e7;
   -webkit-border-radius: 0px 0px 10px 10px;
@@ -1140,24 +1145,185 @@ label.WInfo {
   -o-border-radius: 0px 0px 10px 10px;
   border-radius: 0px 0px 10px 10px;
   border: 1px #225374 solid;
-  padding: 4px;
+  padding: 2px;
   width: 100%;
 }
 
-/* line 427, ../sass/WebElementStructure.sass */
+/* line 429, ../sass/WebElementStructure.sass */
 .WGooglePlusBadge {
   text-decoration: none;
 }
-/* line 429, ../sass/WebElementStructure.sass */
+/* line 431, ../sass/WebElementStructure.sass */
 .WGooglePlusBadge img {
   border: 0;
   width: 32px;
   height: 32px;
 }
 
-/* line 26, ../sass/WebElementStructureWithButtons.sass */
-input[type=button], input[type=submit] {
-  font-size: 19px;
+/* line 436, ../sass/WebElementStructure.sass */
+.WCalendar {
+  z-index: 9999;
+  display: block;
+  position: relative;
+  width: 240px;
+  padding: 8px;
+  color: #333333;
+  background: white;
+  border: 1px solid #cccccc;
+  border-bottom-color: #bbbbbb;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 448, ../sass/WebElementStructure.sass */
+.WCalendar.is-hidden {
+  display: none;
+}
+/* line 451, ../sass/WebElementStructure.sass */
+.WCalendar.is-bound {
+  position: absolute;
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+}
+/* line 455, ../sass/WebElementStructure.sass */
+.WCalendar .pika-title {
+  position: relative;
+  text-align: center;
+}
+/* line 459, ../sass/WebElementStructure.sass */
+.WCalendar .pika-title select {
+  cursor: pointer;
+  position: absolute;
+  z-index: 9998;
+  margin: 0;
+  left: 0;
+  top: 5px;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+/* line 469, ../sass/WebElementStructure.sass */
+.WCalendar .pika-label {
+  display: inline-block;
+  *display: inline;
+  position: relative;
+  z-index: 9999;
+  overflow: hidden;
+  margin: 0;
+  padding: 5px 3px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  background-color: white;
+}
+/* line 482, ../sass/WebElementStructure.sass */
+.WCalendar .pika-prev, .WCalendar .pika-next {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  border: 0;
+  padding: 0;
+  width: 20px;
+  height: 30px;
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75% 75%;
+  white-space: nowrap;
+  text-indent: 100%;
+  overflow: hidden;
+  opacity: 0.5;
+  *position: absolute;
+  *top: 0;
+}
+/* line 502, ../sass/WebElementStructure.sass */
+.WCalendar .pika-prev:hover, .WCalendar .pika-next:hover {
+  opacity: 1;
+}
+/* line 504, ../sass/WebElementStructure.sass */
+.WCalendar .pika-prev.is-disabled, .WCalendar .pika-next.is-disabled {
+  cursor: default;
+  opacity: 0.2;
+}
+/* line 508, ../sass/WebElementStructure.sass */
+.WCalendar .pika-prev, .WCalendar .is-rtl .pika-next {
+  float: left;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==");
+  *left: 0;
+}
+/* line 513, ../sass/WebElementStructure.sass */
+.WCalendar .pika-next, .WCalendar .is-rtl .pika-prev {
+  float: right;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=");
+  *right: 0;
+}
+/* line 518, ../sass/WebElementStructure.sass */
+.WCalendar .pika-select {
+  display: inline-block;
+  *display: inline;
+}
+/* line 522, ../sass/WebElementStructure.sass */
+.WCalendar .pika-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0;
+}
+/* line 529, ../sass/WebElementStructure.sass */
+.WCalendar .pika-table th, .WCalendar .pika-table td {
+  width: 14.28571%;
+}
+/* line 532, ../sass/WebElementStructure.sass */
+.WCalendar .pika-table th {
+  color: #999999;
+  font-size: 12px;
+  line-height: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+/* line 539, ../sass/WebElementStructure.sass */
+.WCalendar .pika-button {
+  cursor: pointer;
+  display: block;
+  outline: none;
+  border: 0;
+  margin: 0;
+  width: 100%;
+  padding: 5px;
+  color: #666666;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+  background: whitesmoke;
+}
+/* line 553, ../sass/WebElementStructure.sass */
+.WCalendar .is-today .pika-button {
+  color: #33aaff;
+  font-weight: bold;
+}
+/* line 557, ../sass/WebElementStructure.sass */
+.WCalendar .is-selected .pika-button {
+  color: white;
+  font-weight: bold;
+  background: #33aaff;
+  box-shadow: inset 0 1px 3px #178fe5;
+  border-radius: 3px;
+}
+/* line 564, ../sass/WebElementStructure.sass */
+.WCalendar .is-disabled .pika-button {
+  pointer-events: none;
+  cursor: default;
+  color: #999999;
+  opacity: 0.3;
+}
+/* line 570, ../sass/WebElementStructure.sass */
+.WCalendar .pika-button:hover {
+  color: white !important;
+  background: #ff8000 !important;
+  box-shadow: none !important;
+  border-radius: 3px !important;
+}
+
+/* line 27, ../sass/WebElementStructureWithButtons.sass */
+input[type=button], input[type=submit], .Button {
+  font-size: 16px;
   padding: 0.3em 1.5em;
   display: inline-block;
   cursor: pointer;
@@ -1181,11 +1347,11 @@ input[type=button], input[type=submit] {
   text-shadow: #f7f7f7 0 1px 0;
 }
 /* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:hover, input[type=submit]:hover {
+input[type=button]:hover, input[type=submit]:hover, .Button:hover {
   text-decoration: none;
 }
 /* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:hover, input[type=submit]:hover {
+input[type=button]:hover, input[type=submit]:hover, .Button:hover {
   background-color: #bebebe;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d7d7d7), color-stop(100%, #bebebe));
   background: -webkit-linear-gradient(#d7d7d7, #bebebe);
@@ -1194,13 +1360,13 @@ input[type=button]:hover, input[type=submit]:hover {
   background: linear-gradient(#d7d7d7, #bebebe);
 }
 /* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:active, input[type=submit]:active {
+input[type=button]:active, input[type=submit]:active, .Button:active {
   -webkit-box-shadow: #b6b6b6 0 1px 2px inset;
   -moz-box-shadow: #b6b6b6 0 1px 2px inset;
   box-shadow: #b6b6b6 0 1px 2px inset;
 }
 /* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].disabled, input[type=button][disabled], input[type=submit].disabled, input[type=submit][disabled] {
+input[type=button].disabled, input[type=button][disabled], input[type=submit].disabled, input[type=submit][disabled], .Button.disabled, .Button[disabled] {
   opacity: 0.6;
   background: #cbcbcb;
   cursor: default;
@@ -1209,13 +1375,13 @@ input[type=button].disabled, input[type=button][disabled], input[type=submit].di
   box-shadow: none;
 }
 /* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner {
+input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner, .Button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 28, ../sass/WebElementStructureWithButtons.sass */
-input[type=button].MainAction, input[type=submit].MainAction {
-  font-size: 19px;
+/* line 29, ../sass/WebElementStructureWithButtons.sass */
+input[type=button].MainAction, input[type=submit].MainAction, .Button.MainAction {
+  font-size: 16px;
   padding: 0.3em 1.5em;
   display: inline-block;
   cursor: pointer;
@@ -1239,11 +1405,11 @@ input[type=button].MainAction, input[type=submit].MainAction {
   text-shadow: #314c2d 0 -1px 0;
 }
 /* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:hover, input[type=submit].MainAction:hover {
+input[type=button].MainAction:hover, input[type=submit].MainAction:hover, .Button.MainAction:hover {
   text-decoration: none;
 }
 /* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:hover, input[type=submit].MainAction:hover {
+input[type=button].MainAction:hover, input[type=submit].MainAction:hover, .Button.MainAction:hover {
   background-color: #476f42;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5c8f55), color-stop(100%, #476f42));
   background: -webkit-linear-gradient(#5c8f55, #476f42);
@@ -1252,13 +1418,13 @@ input[type=button].MainAction:hover, input[type=submit].MainAction:hover {
   background: linear-gradient(#5c8f55, #476f42);
 }
 /* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:active, input[type=submit].MainAction:active {
+input[type=button].MainAction:active, input[type=submit].MainAction:active, .Button.MainAction:active {
   -webkit-box-shadow: #41663d 0 1px 2px inset;
   -moz-box-shadow: #41663d 0 1px 2px inset;
   box-shadow: #41663d 0 1px 2px inset;
 }
 /* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction.disabled, input[type=button].MainAction[disabled], input[type=submit].MainAction.disabled, input[type=submit].MainAction[disabled] {
+input[type=button].MainAction.disabled, input[type=button].MainAction[disabled], input[type=submit].MainAction.disabled, input[type=submit].MainAction[disabled], .Button.MainAction.disabled, .Button.MainAction[disabled] {
   opacity: 0.6;
   background: #527f4c;
   cursor: default;
@@ -1267,13 +1433,13 @@ input[type=button].MainAction.disabled, input[type=button].MainAction[disabled],
   box-shadow: none;
 }
 /* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].MainAction::-moz-focus-inner, input[type=submit].MainAction::-moz-focus-inner {
+input[type=button].MainAction::-moz-focus-inner, input[type=submit].MainAction::-moz-focus-inner, .Button.MainAction::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 30, ../sass/WebElementStructureWithButtons.sass */
-input[type=button].PositiveAction, input[type=submit].PositiveAction {
-  font-size: 19px;
+/* line 31, ../sass/WebElementStructureWithButtons.sass */
+input[type=button].PositiveAction, input[type=submit].PositiveAction, .Button.PositiveAction {
+  font-size: 16px;
   padding: 0.3em 1.5em;
   display: inline-block;
   cursor: pointer;
@@ -1297,11 +1463,11 @@ input[type=button].PositiveAction, input[type=submit].PositiveAction {
   text-shadow: #1d4666 0 -1px 0;
 }
 /* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].PositiveAction:hover, input[type=submit].PositiveAction:hover {
+input[type=button].PositiveAction:hover, input[type=submit].PositiveAction:hover, .Button.PositiveAction:hover {
   text-decoration: none;
 }
 /* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].PositiveAction:hover, input[type=submit].PositiveAction:hover {
+input[type=button].PositiveAction:hover, input[type=submit].PositiveAction:hover, .Button.PositiveAction:hover {
   background-color: #296492;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3480ba), color-stop(100%, #296492));
   background: -webkit-linear-gradient(#3480ba, #296492);
@@ -1310,13 +1476,13 @@ input[type=button].PositiveAction:hover, input[type=submit].PositiveAction:hover
   background: linear-gradient(#3480ba, #296492);
 }
 /* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].PositiveAction:active, input[type=submit].PositiveAction:active {
+input[type=button].PositiveAction:active, input[type=submit].PositiveAction:active, .Button.PositiveAction:active {
   -webkit-box-shadow: #255c86 0 1px 2px inset;
   -moz-box-shadow: #255c86 0 1px 2px inset;
   box-shadow: #255c86 0 1px 2px inset;
 }
 /* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].PositiveAction.disabled, input[type=button].PositiveAction[disabled], input[type=submit].PositiveAction.disabled, input[type=submit].PositiveAction[disabled] {
+input[type=button].PositiveAction.disabled, input[type=button].PositiveAction[disabled], input[type=submit].PositiveAction.disabled, input[type=submit].PositiveAction[disabled], .Button.PositiveAction.disabled, .Button.PositiveAction[disabled] {
   opacity: 0.6;
   background: #2e72a6;
   cursor: default;
@@ -1325,13 +1491,13 @@ input[type=button].PositiveAction.disabled, input[type=button].PositiveAction[di
   box-shadow: none;
 }
 /* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].PositiveAction::-moz-focus-inner, input[type=submit].PositiveAction::-moz-focus-inner {
+input[type=button].PositiveAction::-moz-focus-inner, input[type=submit].PositiveAction::-moz-focus-inner, .Button.PositiveAction::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 32, ../sass/WebElementStructureWithButtons.sass */
-input[type=button].DeleteAction, input[type=submit].DeleteAction {
-  font-size: 19px;
+/* line 33, ../sass/WebElementStructureWithButtons.sass */
+input[type=button].DeleteAction, input[type=submit].DeleteAction, .Button.DeleteAction {
+  font-size: 16px;
   padding: 0.3em 1.5em;
   display: inline-block;
   cursor: pointer;
@@ -1355,11 +1521,11 @@ input[type=button].DeleteAction, input[type=submit].DeleteAction {
   text-shadow: #3e0000 0 -1px 0;
 }
 /* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover {
+input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover, .Button.DeleteAction:hover {
   text-decoration: none;
 }
 /* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover {
+input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover, .Button.DeleteAction:hover {
   background-color: #760000;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aa0000), color-stop(100%, #760000));
   background: -webkit-linear-gradient(#aa0000, #760000);
@@ -1368,13 +1534,13 @@ input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover {
   background: linear-gradient(#aa0000, #760000);
 }
 /* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:active, input[type=submit].DeleteAction:active {
+input[type=button].DeleteAction:active, input[type=submit].DeleteAction:active, .Button.DeleteAction:active {
   -webkit-box-shadow: #670000 0 1px 2px inset;
   -moz-box-shadow: #670000 0 1px 2px inset;
   box-shadow: #670000 0 1px 2px inset;
 }
 /* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction.disabled, input[type=button].DeleteAction[disabled], input[type=submit].DeleteAction.disabled, input[type=submit].DeleteAction[disabled] {
+input[type=button].DeleteAction.disabled, input[type=button].DeleteAction[disabled], input[type=submit].DeleteAction.disabled, input[type=submit].DeleteAction[disabled], .Button.DeleteAction.disabled, .Button.DeleteAction[disabled] {
   opacity: 0.6;
   background: #900000;
   cursor: default;
@@ -1383,13 +1549,13 @@ input[type=button].DeleteAction.disabled, input[type=button].DeleteAction[disabl
   box-shadow: none;
 }
 /* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].DeleteAction::-moz-focus-inner, input[type=submit].DeleteAction::-moz-focus-inner {
+input[type=button].DeleteAction::-moz-focus-inner, input[type=submit].DeleteAction::-moz-focus-inner, .Button.DeleteAction::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 34, ../sass/WebElementStructureWithButtons.sass */
-input[type=button].WToggleButton, input[type=submit].WToggleButton {
-  font-size: 19px;
+/* line 35, ../sass/WebElementStructureWithButtons.sass */
+input[type=button].WToggleButton, input[type=submit].WToggleButton, .Button.WToggleButton {
+  font-size: 16px;
   padding: 0.3em 1.5em;
   display: inline-block;
   cursor: pointer;
@@ -1413,11 +1579,11 @@ input[type=button].WToggleButton, input[type=submit].WToggleButton {
   text-shadow: #666666 0 -1px 0;
 }
 /* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover {
+input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover, .Button.WToggleButton:hover {
   text-decoration: none;
 }
 /* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover {
+input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover, .Button.WToggleButton:hover {
   background-color: #626262;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #b7b7b7), color-stop(50%, #626262), color-stop(100%, #4e4e4e));
   background: -webkit-linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
@@ -1426,13 +1592,13 @@ input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover {
   background: linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
 }
 /* line 27, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:active, input[type=submit].WToggleButton:active {
+input[type=button].WToggleButton:active, input[type=submit].WToggleButton:active, .Button.WToggleButton:active {
   -webkit-box-shadow: #4e4e4e 0 1px 2px inset;
   -moz-box-shadow: #4e4e4e 0 1px 2px inset;
   box-shadow: #4e4e4e 0 1px 2px inset;
 }
 /* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton.disabled, input[type=button].WToggleButton[disabled], input[type=submit].WToggleButton.disabled, input[type=submit].WToggleButton[disabled] {
+input[type=button].WToggleButton.disabled, input[type=button].WToggleButton[disabled], input[type=submit].WToggleButton.disabled, input[type=submit].WToggleButton[disabled], .Button.WToggleButton.disabled, .Button.WToggleButton[disabled] {
   opacity: 0.6;
   background: #626262;
   cursor: default;
@@ -1441,25 +1607,25 @@ input[type=button].WToggleButton.disabled, input[type=button].WToggleButton[disa
   box-shadow: none;
 }
 /* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].WToggleButton::-moz-focus-inner, input[type=submit].WToggleButton::-moz-focus-inner {
+input[type=button].WToggleButton::-moz-focus-inner, input[type=submit].WToggleButton::-moz-focus-inner, .Button.WToggleButton::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
 }
-/* line 36, ../sass/WebElementStructureWithButtons.sass */
-input[type=button].WToggleButton.Pushed, input[type=submit].WToggleButton.Pushed {
+/* line 37, ../sass/WebElementStructureWithButtons.sass */
+input[type=button].WToggleButton.Pushed, input[type=submit].WToggleButton.Pushed, .Button.WToggleButton.Pushed {
   -webkit-box-shadow: #333333 0 0.2em 0.4em inset;
   -moz-box-shadow: #333333 0 0.2em 0.4em inset;
   box-shadow: #333333 0 0.2em 0.4em inset;
   border: solid 1px #212121;
 }
 /* line 13, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-styles.sass */
-input[type=button].WToggleButton.Pushed:active, input[type=submit].WToggleButton.Pushed:active {
+input[type=button].WToggleButton.Pushed:active, input[type=submit].WToggleButton.Pushed:active, .Button.WToggleButton.Pushed:active {
   -webkit-box-shadow: #282828 0 0.2em 0.4em inset;
   -moz-box-shadow: #282828 0 0.2em 0.4em inset;
   box-shadow: #282828 0 0.2em 0.4em inset;
 }
-/* line 39, ../sass/WebElementStructureWithButtons.sass */
-input[type=button][disabled], input[type=submit][disabled] {
+/* line 40, ../sass/WebElementStructureWithButtons.sass */
+input[type=button][disabled], input[type=submit][disabled], .Button[disabled] {
   -webkit-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
   -moz-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
   box-shadow: #6c6c6c 0 0.2em 0.4em inset;
@@ -1469,27 +1635,27 @@ input[type=button][disabled], input[type=submit][disabled] {
   box-shadow: white 1px 1px 1px 1px;
 }
 /* line 13, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-styles.sass */
-input[type=button][disabled]:active, input[type=submit][disabled]:active {
+input[type=button][disabled]:active, input[type=submit][disabled]:active, .Button[disabled]:active {
   -webkit-box-shadow: #616161 0 0.2em 0.4em inset;
   -moz-box-shadow: #616161 0 0.2em 0.4em inset;
   box-shadow: #616161 0 0.2em 0.4em inset;
 }
-/* line 41, ../sass/WebElementStructureWithButtons.sass */
-input[type=button][disabled]:active, input[type=submit][disabled]:active {
+/* line 42, ../sass/WebElementStructureWithButtons.sass */
+input[type=button][disabled]:active, input[type=submit][disabled]:active, .Button[disabled]:active {
   -webkit-box-shadow: white 1px 1px 1px 1px;
   -moz-box-shadow: white 1px 1px 1px 1px;
   box-shadow: white 1px 1px 1px 1px;
 }
 
-/* line 45, ../sass/WebElementStructureWithButtons.sass */
+/* line 46, ../sass/WebElementStructureWithButtons.sass */
 .WButtonGroup input[type=button], .WButtonGroup input[type=submit] {
   border-radius: 0px 0px 0px 0px;
 }
-/* line 48, ../sass/WebElementStructureWithButtons.sass */
+/* line 49, ../sass/WebElementStructureWithButtons.sass */
 .WButtonGroup .WFirst input[type=button], .WButtonGroup .WFirst input[type=submit] {
   border-radius: 8px 0px 0px 8px;
 }
-/* line 51, ../sass/WebElementStructureWithButtons.sass */
+/* line 52, ../sass/WebElementStructureWithButtons.sass */
 .WButtonGroup .WLast input[type=button], .WButtonGroup .WLast input[type=submit] {
   border-radius: 0px 8px 8px 0px;
 }
@@ -1582,26 +1748,31 @@ a:visited {
 }
 
 /* line 23, ../sass/WebElements.sass */
+label {
+  cursor: inherit;
+}
+
+/* line 26, ../sass/WebElements.sass */
 ul {
   list-style: disc;
 }
 
-/* line 25, ../sass/WebElements.sass */
+/* line 28, ../sass/WebElements.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 34, ../sass/WebElements.sass */
+/* line 37, ../sass/WebElements.sass */
 td {
   color: black;
 }
 
-/* line 37, ../sass/WebElements.sass */
+/* line 40, ../sass/WebElements.sass */
 table.table-background td {
   border: 1px solid #eef0f4;
 }
 
-/* line 40, ../sass/WebElements.sass */
+/* line 43, ../sass/WebElements.sass */
 th {
   background-color: #c4d0e4;
   border-bottom-style: solid;
@@ -1611,158 +1782,158 @@ th {
   text-decoration: none;
 }
 
-/* line 48, ../sass/WebElements.sass */
+/* line 51, ../sass/WebElements.sass */
 .yellow {
   background-color: #df8c42;
 }
 
-/* line 51, ../sass/WebElements.sass */
+/* line 54, ../sass/WebElements.sass */
 .rowlight {
   background-color: #f0f0f0;
   border: 1px solid black;
 }
 
-/* line 55, ../sass/WebElements.sass */
+/* line 58, ../sass/WebElements.sass */
 .rowdark {
   background-color: #dadada;
   border: 1px solid black;
 }
 
-/* line 60, ../sass/WebElements.sass */
+/* line 63, ../sass/WebElements.sass */
 table.GlobalTable {
   border-spacing: 0;
 }
-/* line 62, ../sass/WebElements.sass */
+/* line 65, ../sass/WebElements.sass */
 table.GlobalTable tr {
   border: none;
   height: 25px;
   color: black;
   background: #f2faff;
 }
-/* line 67, ../sass/WebElements.sass */
+/* line 70, ../sass/WebElements.sass */
 table.GlobalTable tr a {
   text-decoration: underline;
   color: #0963bd;
 }
-/* line 70, ../sass/WebElements.sass */
+/* line 73, ../sass/WebElements.sass */
 table.GlobalTable tr a:hover {
   color: #0051a3;
 }
-/* line 72, ../sass/WebElements.sass */
+/* line 75, ../sass/WebElements.sass */
 table.GlobalTable tr.taskColorHigh {
   background: #ff7777;
 }
-/* line 74, ../sass/WebElements.sass */
+/* line 77, ../sass/WebElements.sass */
 table.GlobalTable tr.taskColorHigh td {
   border-bottom: 1px solid #eeeeee;
 }
-/* line 76, ../sass/WebElements.sass */
+/* line 79, ../sass/WebElements.sass */
 table.GlobalTable tr.taskColorMedium {
   background: #ffff99;
 }
-/* line 78, ../sass/WebElements.sass */
+/* line 81, ../sass/WebElements.sass */
 table.GlobalTable tr.taskColorLow {
   background: #99ff99;
 }
-/* line 80, ../sass/WebElements.sass */
+/* line 83, ../sass/WebElements.sass */
 table.GlobalTable tr.warning {
   background: #ffdd77;
 }
-/* line 82, ../sass/WebElements.sass */
+/* line 85, ../sass/WebElements.sass */
 table.GlobalTable tr.error {
   background: #fc797b;
 }
-/* line 84, ../sass/WebElements.sass */
+/* line 87, ../sass/WebElements.sass */
 table.GlobalTable tr:hover {
   background: #fafacd;
 }
-/* line 86, ../sass/WebElements.sass */
+/* line 89, ../sass/WebElements.sass */
 table.GlobalTable tr:hover.selected {
   background: #315672;
 }
-/* line 88, ../sass/WebElements.sass */
+/* line 91, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even) {
   background: white;
 }
-/* line 90, ../sass/WebElements.sass */
+/* line 93, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).taskColorHigh {
   background: #ff7777;
 }
-/* line 92, ../sass/WebElements.sass */
+/* line 95, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).taskColorMedium {
   background: #ffff99;
 }
-/* line 94, ../sass/WebElements.sass */
+/* line 97, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).taskColorLow {
   background: #99ff99;
 }
-/* line 96, ../sass/WebElements.sass */
+/* line 99, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).warning {
   background: #ffdd77;
 }
-/* line 98, ../sass/WebElements.sass */
+/* line 101, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).error {
   background: #fc797b;
 }
-/* line 100, ../sass/WebElements.sass */
+/* line 103, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).selected {
   background: #548bb5;
   color: white;
 }
-/* line 31, ../sass/WebElements.sass */
+/* line 34, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even).selected a {
   color: white;
 }
-/* line 102, ../sass/WebElements.sass */
+/* line 105, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd) {
   background: #dedede;
 }
-/* line 104, ../sass/WebElements.sass */
+/* line 107, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).taskColorHigh {
   background: #ff7777;
 }
-/* line 106, ../sass/WebElements.sass */
+/* line 109, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).taskColorMedium {
   background: #ffff99;
 }
-/* line 108, ../sass/WebElements.sass */
+/* line 111, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).taskColorLow {
   background: #99ff99;
 }
-/* line 110, ../sass/WebElements.sass */
+/* line 113, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).warning {
   background: #ffdd77;
 }
-/* line 112, ../sass/WebElements.sass */
+/* line 115, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).error {
   background: #fc797b;
 }
-/* line 114, ../sass/WebElements.sass */
+/* line 117, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).selected {
   background: #548bb5;
   color: white;
 }
-/* line 31, ../sass/WebElements.sass */
+/* line 34, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd).selected a {
   color: white;
 }
-/* line 116, ../sass/WebElements.sass */
+/* line 119, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even):hover {
   background: #fafacd;
 }
-/* line 118, ../sass/WebElements.sass */
+/* line 121, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(even):hover.selected {
   background: #315672;
 }
-/* line 120, ../sass/WebElements.sass */
+/* line 123, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd):hover {
   background: #fafacd;
 }
-/* line 122, ../sass/WebElements.sass */
+/* line 125, ../sass/WebElements.sass */
 table.GlobalTable tr:nth-child(odd):hover.selected {
   background: #315672;
 }
-/* line 124, ../sass/WebElements.sass */
+/* line 127, ../sass/WebElements.sass */
 table.GlobalTable th {
   text-align: left;
   border-right: 1px solid #5ea3ec;
@@ -1782,20 +1953,20 @@ table.GlobalTable th {
   color: white;
   white-space: nowrap;
 }
-/* line 142, ../sass/WebElements.sass */
+/* line 145, ../sass/WebElements.sass */
 table.GlobalTable th a {
   text-decoration: underline;
   color: white;
 }
-/* line 145, ../sass/WebElements.sass */
+/* line 148, ../sass/WebElements.sass */
 table.GlobalTable th a:hover {
   color: #cccccc;
 }
-/* line 147, ../sass/WebElements.sass */
+/* line 150, ../sass/WebElements.sass */
 table.GlobalTable th a:active {
   color: #999999;
 }
-/* line 149, ../sass/WebElements.sass */
+/* line 152, ../sass/WebElements.sass */
 table.GlobalTable td {
   border-right: 1px solid #eeeeee;
   border-left: none;
@@ -1803,43 +1974,43 @@ table.GlobalTable td {
   border-top: none;
   padding-left: 3px;
 }
-/* line 155, ../sass/WebElements.sass */
+/* line 158, ../sass/WebElements.sass */
 table.GlobalTable td.TableViewSeparator {
   background: gray;
   color: white;
 }
-/* line 159, ../sass/WebElements.sass */
+/* line 162, ../sass/WebElements.sass */
 table.GlobalTable .selected td {
   background: #548bb5;
   color: white;
 }
-/* line 31, ../sass/WebElements.sass */
+/* line 34, ../sass/WebElements.sass */
 table.GlobalTable .selected td a {
   color: white;
 }
-/* line 162, ../sass/WebElements.sass */
+/* line 165, ../sass/WebElements.sass */
 table.GlobalTable .rowdark {
   background: #dedede \9;
 }
-/* line 164, ../sass/WebElements.sass */
+/* line 167, ../sass/WebElements.sass */
 table.GlobalTable .rowdark.selected {
   background: #548bb5;
   color: white;
 }
-/* line 31, ../sass/WebElements.sass */
+/* line 34, ../sass/WebElements.sass */
 table.GlobalTable .rowdark.selected a {
   color: white;
 }
-/* line 167, ../sass/WebElements.sass */
+/* line 170, ../sass/WebElements.sass */
 table.GlobalTable .rowlight {
   background: white \9;
 }
-/* line 169, ../sass/WebElements.sass */
+/* line 172, ../sass/WebElements.sass */
 table.GlobalTable .rowlight.selected {
   background: #548bb5;
   color: white;
 }
-/* line 31, ../sass/WebElements.sass */
+/* line 34, ../sass/WebElements.sass */
 table.GlobalTable .rowlight.selected a {
   color: white;
 }
@@ -1932,274 +2103,6 @@ a:visited {
 }
 
 /* line 33, ../sass/WebBot.sass */
-input[type=button], input[type=submit] {
-  font-size: 19px;
-  padding: 0.3em 1.5em;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFE4E4E4', endColorstr='#FFB1B1B1');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e4e4e4), color-stop(100%, #cbcbcb));
-  background: -webkit-linear-gradient(#e4e4e4, #cbcbcb);
-  background: -moz-linear-gradient(#e4e4e4, #cbcbcb);
-  background: -o-linear-gradient(#e4e4e4, #cbcbcb);
-  background: linear-gradient(#e4e4e4, #cbcbcb);
-  -webkit-box-shadow: white 0 1px 0 inset;
-  -moz-box-shadow: white 0 1px 0 inset;
-  box-shadow: white 0 1px 0 inset;
-  border: 1px solid #bebebe;
-  color: black;
-  text-shadow: #f7f7f7 0 1px 0;
-}
-/* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:hover, input[type=submit]:hover {
-  text-decoration: none;
-}
-/* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:hover, input[type=submit]:hover {
-  background-color: #bebebe;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d7d7d7), color-stop(100%, #bebebe));
-  background: -webkit-linear-gradient(#d7d7d7, #bebebe);
-  background: -moz-linear-gradient(#d7d7d7, #bebebe);
-  background: -o-linear-gradient(#d7d7d7, #bebebe);
-  background: linear-gradient(#d7d7d7, #bebebe);
-}
-/* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button]:active, input[type=submit]:active {
-  -webkit-box-shadow: #b6b6b6 0 1px 2px inset;
-  -moz-box-shadow: #b6b6b6 0 1px 2px inset;
-  box-shadow: #b6b6b6 0 1px 2px inset;
-}
-/* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].disabled, input[type=button][disabled], input[type=submit].disabled, input[type=submit][disabled] {
-  opacity: 0.6;
-  background: #cbcbcb;
-  cursor: default;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-/* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button]::-moz-focus-inner, input[type=submit]::-moz-focus-inner {
-  padding: 0 !important;
-  margin: -1px !important;
-}
-/* line 35, ../sass/WebBot.sass */
-input[type=button].MainAction, input[type=submit].MainAction {
-  font-size: 19px;
-  padding: 0.3em 1.5em;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF669F5F', endColorstr='#FF3D5F39');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #669f5f), color-stop(100%, #527f4c));
-  background: -webkit-linear-gradient(#669f5f, #527f4c);
-  background: -moz-linear-gradient(#669f5f, #527f4c);
-  background: -o-linear-gradient(#669f5f, #527f4c);
-  background: linear-gradient(#669f5f, #527f4c);
-  -webkit-box-shadow: #94bc8f 0 1px 0 inset;
-  -moz-box-shadow: #94bc8f 0 1px 0 inset;
-  box-shadow: #94bc8f 0 1px 0 inset;
-  border: 1px solid #476f42;
-  color: white;
-  text-shadow: #314c2d 0 -1px 0;
-}
-/* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:hover, input[type=submit].MainAction:hover {
-  text-decoration: none;
-}
-/* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:hover, input[type=submit].MainAction:hover {
-  background-color: #476f42;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5c8f55), color-stop(100%, #476f42));
-  background: -webkit-linear-gradient(#5c8f55, #476f42);
-  background: -moz-linear-gradient(#5c8f55, #476f42);
-  background: -o-linear-gradient(#5c8f55, #476f42);
-  background: linear-gradient(#5c8f55, #476f42);
-}
-/* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction:active, input[type=submit].MainAction:active {
-  -webkit-box-shadow: #41663d 0 1px 2px inset;
-  -moz-box-shadow: #41663d 0 1px 2px inset;
-  box-shadow: #41663d 0 1px 2px inset;
-}
-/* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].MainAction.disabled, input[type=button].MainAction[disabled], input[type=submit].MainAction.disabled, input[type=submit].MainAction[disabled] {
-  opacity: 0.6;
-  background: #527f4c;
-  cursor: default;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-/* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].MainAction::-moz-focus-inner, input[type=submit].MainAction::-moz-focus-inner {
-  padding: 0 !important;
-  margin: -1px !important;
-}
-/* line 37, ../sass/WebBot.sass */
-input[type=button].DeleteAction, input[type=submit].DeleteAction {
-  font-size: 19px;
-  padding: 0.3em 1.5em;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFC30000', endColorstr='#FF5D0000');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c30000), color-stop(100%, #900000));
-  background: -webkit-linear-gradient(#c30000, #900000);
-  background: -moz-linear-gradient(#c30000, #900000);
-  background: -o-linear-gradient(#c30000, #900000);
-  background: linear-gradient(#c30000, #900000);
-  -webkit-box-shadow: #ff1111 0 1px 0 inset;
-  -moz-box-shadow: #ff1111 0 1px 0 inset;
-  box-shadow: #ff1111 0 1px 0 inset;
-  border: 1px solid #760000;
-  color: white;
-  text-shadow: #3e0000 0 -1px 0;
-}
-/* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover {
-  text-decoration: none;
-}
-/* line 36, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:hover, input[type=submit].DeleteAction:hover {
-  background-color: #760000;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aa0000), color-stop(100%, #760000));
-  background: -webkit-linear-gradient(#aa0000, #760000);
-  background: -moz-linear-gradient(#aa0000, #760000);
-  background: -o-linear-gradient(#aa0000, #760000);
-  background: linear-gradient(#aa0000, #760000);
-}
-/* line 39, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction:active, input[type=submit].DeleteAction:active {
-  -webkit-box-shadow: #670000 0 1px 2px inset;
-  -moz-box-shadow: #670000 0 1px 2px inset;
-  box-shadow: #670000 0 1px 2px inset;
-}
-/* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].DeleteAction.disabled, input[type=button].DeleteAction[disabled], input[type=submit].DeleteAction.disabled, input[type=submit].DeleteAction[disabled] {
-  opacity: 0.6;
-  background: #900000;
-  cursor: default;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-/* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].DeleteAction::-moz-focus-inner, input[type=submit].DeleteAction::-moz-focus-inner {
-  padding: 0 !important;
-  margin: -1px !important;
-}
-/* line 39, ../sass/WebBot.sass */
-input[type=button].WToggleButton, input[type=submit].WToggleButton {
-  font-size: 19px;
-  padding: 0.3em 1.5em;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF7C7C7C', endColorstr='#FF494949');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bcbcbc), color-stop(50%, #7c7c7c), color-stop(100%, #626262));
-  background: -webkit-linear-gradient(#bcbcbc, #7c7c7c 50%, #626262);
-  background: -moz-linear-gradient(#bcbcbc, #7c7c7c 50%, #626262);
-  background: -o-linear-gradient(#bcbcbc, #7c7c7c 50%, #626262);
-  background: linear-gradient(#bcbcbc, #7c7c7c 50%, #626262);
-  -webkit-box-shadow: #e2e2e2 0 1px 0 inset;
-  -moz-box-shadow: #e2e2e2 0 1px 0 inset;
-  box-shadow: #e2e2e2 0 1px 0 inset;
-  border: 1px solid #565656;
-  color: white;
-  text-shadow: #666666 0 -1px 0;
-}
-/* line 15, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover {
-  text-decoration: none;
-}
-/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:hover, input[type=submit].WToggleButton:hover {
-  background-color: #626262;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #b7b7b7), color-stop(50%, #626262), color-stop(100%, #4e4e4e));
-  background: -webkit-linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
-  background: -moz-linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
-  background: -o-linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
-  background: linear-gradient(#b7b7b7, #626262 50%, #4e4e4e);
-}
-/* line 27, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton:active, input[type=submit].WToggleButton:active {
-  -webkit-box-shadow: #4e4e4e 0 1px 2px inset;
-  -moz-box-shadow: #4e4e4e 0 1px 2px inset;
-  box-shadow: #4e4e4e 0 1px 2px inset;
-}
-/* line 6, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
-input[type=button].WToggleButton.disabled, input[type=button].WToggleButton[disabled], input[type=submit].WToggleButton.disabled, input[type=submit].WToggleButton[disabled] {
-  opacity: 0.6;
-  background: #626262;
-  cursor: default;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-/* line 73, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/_sassy-buttons.sass */
-input[type=button].WToggleButton::-moz-focus-inner, input[type=submit].WToggleButton::-moz-focus-inner {
-  padding: 0 !important;
-  margin: -1px !important;
-}
-/* line 41, ../sass/WebBot.sass */
-input[type=button].WToggleButton.Pushed, input[type=submit].WToggleButton.Pushed {
-  -webkit-box-shadow: #333333 0 0.2em 0.4em inset;
-  -moz-box-shadow: #333333 0 0.2em 0.4em inset;
-  box-shadow: #333333 0 0.2em 0.4em inset;
-  border: solid 1px #212121;
-}
-/* line 13, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-styles.sass */
-input[type=button].WToggleButton.Pushed:active, input[type=submit].WToggleButton.Pushed:active {
-  -webkit-box-shadow: #282828 0 0.2em 0.4em inset;
-  -moz-box-shadow: #282828 0 0.2em 0.4em inset;
-  box-shadow: #282828 0 0.2em 0.4em inset;
-}
-/* line 43, ../sass/WebBot.sass */
-input[type=button][disabled], input[type=submit][disabled] {
-  -webkit-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
-  -moz-box-shadow: #6c6c6c 0 0.2em 0.4em inset;
-  box-shadow: #6c6c6c 0 0.2em 0.4em inset;
-  border: solid 1px #5a5a5a;
-  -webkit-box-shadow: white 1px 1px 1px 1px;
-  -moz-box-shadow: white 1px 1px 1px 1px;
-  box-shadow: white 1px 1px 1px 1px;
-}
-/* line 13, ../../../../../../../var/lib/gems/1.9.1/gems/sassy-buttons-0.1.4/stylesheets/sassy-buttons/_sassy-button-styles.sass */
-input[type=button][disabled]:active, input[type=submit][disabled]:active {
-  -webkit-box-shadow: #616161 0 0.2em 0.4em inset;
-  -moz-box-shadow: #616161 0 0.2em 0.4em inset;
-  box-shadow: #616161 0 0.2em 0.4em inset;
-}
-/* line 46, ../sass/WebBot.sass */
-input[type=button][disabled]:active, input[type=submit][disabled]:active {
-  -webkit-box-shadow: white 1px 1px 1px 1px;
-  -moz-box-shadow: white 1px 1px 1px 1px;
-  box-shadow: white 1px 1px 1px 1px;
-}
-
-/* line 49, ../sass/WebBot.sass */
 .WLoading {
   -webkit-box-shadow: #b3b3b3 1px 1px 1px 1px;
   -moz-box-shadow: #b3b3b3 1px 1px 1px 1px;
@@ -2207,24 +2110,24 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background-color: lightgrey;
   border: 1px gray solid;
 }
-/* line 53, ../sass/WebBot.sass */
+/* line 37, ../sass/WebBot.sass */
 .WLoading span {
   line-height: 30px;
   margin-left: 10px;
 }
-/* line 56, ../sass/WebBot.sass */
+/* line 40, ../sass/WebBot.sass */
 .WLoading .WContent {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-/* line 60, ../sass/WebBot.sass */
+/* line 44, ../sass/WebBot.sass */
 .WTabLabels {
   background-color: #434343;
   padding-top: 10px;
   padding-left: 10px;
 }
-/* line 64, ../sass/WebBot.sass */
+/* line 48, ../sass/WebBot.sass */
 .WTabLabels .WTabLabel {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -2237,7 +2140,7 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   border-right: 1px gray solid;
   padding: 5px;
 }
-/* line 71, ../sass/WebBot.sass */
+/* line 55, ../sass/WebBot.sass */
 .WTabLabels .WTabLabel.WUnselected {
   cursor: pointer;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #cccccc), color-stop(100%, #aaaaaa));
@@ -2247,7 +2150,7 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background-image: linear-gradient(#ffffff, #cccccc, #aaaaaa);
   border-top: 1px black solid;
 }
-/* line 75, ../sass/WebBot.sass */
+/* line 59, ../sass/WebBot.sass */
 .WTabLabels .WTabLabel.WUnselected:hover {
   border-top: 1px #396eff solid;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #999999), color-stop(100%, #777777));
@@ -2256,7 +2159,7 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background-image: -o-linear-gradient(#ffffff, #999999, #777777);
   background-image: linear-gradient(#ffffff, #999999, #777777);
 }
-/* line 79, ../sass/WebBot.sass */
+/* line 63, ../sass/WebBot.sass */
 .WTabLabels .WTabLabel.WSelected {
   cursor: default;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aaaaaa), color-stop(50%, #cccccc), color-stop(100%, #ffffff));
@@ -2265,68 +2168,4 @@ input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background-image: -o-linear-gradient(#aaaaaa, #cccccc, #ffffff);
   background-image: linear-gradient(#aaaaaa, #cccccc, #ffffff);
   border-top: 1px white solid;
-}
-
-/* line 85, ../sass/WebBot.sass */
-.WDropArea {
-  -webkit-box-shadow: #b3b3b3 1px 1px 1px 1px;
-  -moz-box-shadow: #b3b3b3 1px 1px 1px 1px;
-  box-shadow: #b3b3b3 1px 1px 1px 1px;
-  -webkit-border-radius: 20px 20px;
-  -moz-border-radius: 20px / 20px;
-  border-radius: 20px / 20px;
-  height: 360px;
-  width: 380px;
-  overflow: auto;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  padding-left: 20px;
-  border: 1px gray solid;
-}
-/* line 95, ../sass/WebBot.sass */
-.WDropArea.WEmpty {
-  height: 380px;
-  width: 400px;
-  background-image: url("filedrop.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 0px;
-  padding-bottom: 20px;
-}
-/* line 103, ../sass/WebBot.sass */
-.WDropArea .WStatusBar {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  border-radius: 20px;
-  background-color: lightgrey;
-  border-bottom: 1px gray solid;
-  line-height: 32px;
-}
-/* line 108, ../sass/WebBot.sass */
-.WDropArea .WStatusBar .WDropIndicator {
-  margin-left: 30px;
-  margin-right: 15px;
-}
-/* line 112, ../sass/WebBot.sass */
-.WDropArea .WFile {
-  width: 130px;
-  height: 140px;
-  padding: 5px;
-}
-/* line 116, ../sass/WebBot.sass */
-.WDropArea .WFile .WImageContainer {
-  width: 128px;
-  height: 128px;
-}
-/* line 119, ../sass/WebBot.sass */
-.WDropArea .WFile .WImageContainer img {
-  max-width: 128px;
-  max-height: 128px;
-}
-/* line 122, ../sass/WebBot.sass */
-.WDropArea .WFile span {
-  text-align: center;
-  overflow: hidden;
 }

@@ -449,14 +449,16 @@ class GuiBuilder(QMainWindow):
         if accessor:
             xml += "@" + accessor
         nodeID = node.properties.get('id', None)
-        if nodeID:
+        idUsed = False
+        if nodeID and not "." in nodeID:
             xml += "#" + nodeID
+            idUsed=True
         classes = node.properties.get('class', None)
         if classes:
             for nodeClass in classes.split(' '):
                 xml += "." + nodeClass
         for propertyName, propertyValue in iteritems(node.properties):
-            if not propertyValue or propertyName in ('class', 'id', 'accessor'):
+            if not propertyValue or propertyName in ('class', 'accessor') or (propertyName == 'id' and idUsed):
                 continue
 
             propertyValue = unicode(propertyValue).replace("&amp;", "&").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -655,6 +657,7 @@ class GuiBuilder(QMainWindow):
         self.session.save()
 
     def setFile(self, fileName):
+        fileName = str(fileName)
         global sharedFilesRoot
         templateFile = open(fileName, 'r')
         template = templateFile.read()
